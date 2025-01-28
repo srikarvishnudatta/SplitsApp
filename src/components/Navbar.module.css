@@ -1,0 +1,30 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+}
+.logolist{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.logotitle{
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    align-self: center;
+}
+.list{
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+.list li{
+    align-self: center;
+}
+.buttoncontainer{
+    padding-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
