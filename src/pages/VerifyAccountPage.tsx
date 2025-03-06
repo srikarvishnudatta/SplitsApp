@@ -27,7 +27,7 @@ function VerifyAccountPage(){
                 navigate("/login")
             }, 3000)
         }
-    }, [isSuccess])
+    }, [isSuccess, navigate, toast])
     const {mutate} = useMutation({
         mutationKey:["refetch-link"],
         mutationFn: () => resendVerification(email)
