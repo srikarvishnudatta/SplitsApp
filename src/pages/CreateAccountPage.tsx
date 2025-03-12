@@ -76,7 +76,7 @@ function CreateAccountPage() {
                        onChange={(e) => setPassword(e.target.value)}
                        placeholder={"password@123"}
                        required className={"focus-visible:ring-0"}/>
-                <p>With us already? <NavLink to={"/login"}> click</NavLink></p>
+                <NavLink to={"/login"} className="text-gray-500 text-sm"> Already have an account?</NavLink>
                 <Button className={"w-full "}>Continue</Button>
             </form>
         </div>

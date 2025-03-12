@@ -1,23 +1,16 @@
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import {Outlet} from "react-router-dom";
-import logo from "/icons8-money-50.png"
+
 
 function LandingLayout(){
-    return <>
-        <nav className={"max-w-[1340px] p-2 flex items-center gap-6"}>
-            <div className={"flex items-center"}>
-                <img src={logo} alt="" className={"self-center"}/>
-                <h2 className={"text-black font-semibold text-2xl"}>
-                    Splits
-                </h2>
-            </div>
-            <ul className={"list-none flex gap-4"}>
-                <li>GitHub</li>
-                <li>About us</li>
-            </ul>
-        </nav>
+    return <div className="max-w-[1340px] mx-auto min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-1 items-center">
         <Outlet/>
-
-    </>
+        </div>
+        <Footer />
+    </div>
 }
 
 export default LandingLayout

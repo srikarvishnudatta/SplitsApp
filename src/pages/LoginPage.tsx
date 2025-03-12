@@ -43,11 +43,6 @@ function LoginPage(){
             </NavLink>
             <Button className={"w-full "}>Continue</Button>
         </form>
-        <div>
-            {/*<div className={"border rounded-sm py-2 px-2"}>*/}
-            {/*    /!*<FontAwesomeIcon icon="fa-brands fa-google" size="lg" style={{color: "#FFD43B",}} />*!/*/}
-            {/*    Continue with Google</div>*/}
-        </div>
     </div>
 }
 
