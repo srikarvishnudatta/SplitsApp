@@ -27,3 +27,7 @@ export async function fetchGroups(){
     const resData : GenericResponse = await clientAxios.get("/group/").then(onSuccess).catch(onError);
     return resData
 }
+export async function fetchInvites(){
+    const response = await clientAxios.get("/group/invites").then(onSuccess).catch(onError);
+    return response;
+}

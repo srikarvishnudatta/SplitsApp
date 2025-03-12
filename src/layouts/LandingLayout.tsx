@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import logo from "/favicon-48.png"
+import logo from "/icons8-money-50.png"
 
 function LandingLayout(){
     return <>
