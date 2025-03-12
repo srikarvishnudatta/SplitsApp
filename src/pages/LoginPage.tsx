@@ -4,39 +4,43 @@ import {Button} from "@/components/ui/button.tsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import {login} from "@/api/http.ts";
-import {User} from "@/types/types.ts"
-import {FormEvent, useState} from "react";
-import { Info } from "lucide-react";
+import {User} from "@/types/types.ts";
+import AuthError from "@/components/AuthError";
+import {useForm} from "react-hook-form";
 
+
+type LoginFormValues = {
+    email:string;
+    password:string;
+}
 function LoginPage(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {register, handleSubmit} = useForm<LoginFormValues>();
     const { mutate, isError, error} = useMutation<unknown, {message:string}, User>({
         mutationKey: ["login"],
         mutationFn: (user) => login(user),
         onSuccess: () => navigate("/home")
     });
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    function submitHandler(ev: FormEvent<HTMLFormElement>){
-        ev.preventDefault()
-        mutate({email, password})
+    function submitHandler(data: LoginFormValues){
+        console.log({...data})
+        mutate({...data})
     }
     return <div className={"max-w-[500px] mx-auto mt-[100px]"}>
         <h1 className={"text-2xl font-semibold"}>Get Back. Settle it.</h1>
         <h1 className={"text-2xl font-semibold text-gray-400"}>Log back in</h1>
-        {isError && <p className="bg-red-100 p-2 mt-1 text-sm flex gap-1 items-center border-sm"><Info />{error.message}</p>}
-        <form action="" className={"mt-4 flex flex-col gap-3"} onSubmit={submitHandler}>
+        {isError && <AuthError message={error.message}/>}
+        <form action="" className={"mt-4 flex flex-col gap-3"} onSubmit={handleSubmit(submitHandler)}>
             <Label>Email</Label>
             <Input type={"email"}
                    placeholder={"your@example.com"}
                    required className={"focus-visible:ring-0"}
-                   onChange={(e) => setEmail(e.target.value)}
+                   {...register("email")}
             />
             <Label>Password</Label>
             <Input type={"password"}
                    placeholder={"password@123"}
                    required className={"focus-visible:ring-0"}
-                   onChange={(e) => setPassword(e.target.value)}
+                   {...register("password")}
             />
             <NavLink to={"/auth/resetPassword"}>
             <p className={"text-gray-500 text-sm"}>Forgot password?</p>
