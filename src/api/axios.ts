@@ -1,5 +1,4 @@
 import axios, {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axios"
-import globalRouter from "@/lib/globalRouter.ts";
 
 const clientAxios = axios.create({
     baseURL:"http://localhost:4000/",
@@ -33,9 +32,10 @@ clientAxios.interceptors.response.use(
     async (error) => {
         const {response} = error
         const {status, data} = response || {}
-        if (status === 401 && data?.errorCode === "Invalid_Access_Token" && globalRouter.navigate){
+        if (status === 401 && data?.errCode === "Invalid_Access_Token"){
             // if any error navigate to /login.
-            globalRouter.navigate("/login")
+            // globalRouter.navigate("/login")
+            window.location.replace("/login")
         }
         return Promise.reject(error);
     }

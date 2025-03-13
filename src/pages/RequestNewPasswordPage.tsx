@@ -16,9 +16,11 @@ function RequestNewPasswordPage(){
         ev.preventDefault();
         mutate();
     }
-    return <div className="w-[350px] mx-auto mt-20">
+    return <div className="max-w-xs flex justify-center items-center mx-auto mt-20">
         <form action="" className="flex flex-col gap-3" onSubmit={submitHandler}>
             {isError && <AuthError message={error.message}/>}
+            <h1 className={"font-semibold text-3xl"}>Forgot your Password?</h1>
+            <h3 className={"text-gray-500 font-medium"}>Don't worry, lets start with your email</h3>
             <Label>Email</Label>
             <Input placeholder="your email" name="email" id="email" value={email}
             onChange={(ev) => setEmail(ev.target.value)}

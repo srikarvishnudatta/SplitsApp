@@ -41,7 +41,7 @@ function NewPasswordPage() {
             }
         }, [isSuccess])
   return (
-    <div className="w-[350px] mx-auto mt-20">
+    <div className="w-[350px] mx-auto flex items-center justify-center">
     <form action="" className="flex flex-col gap-3" onSubmit={submitHandler}>
         {err && <AuthError message={err}/>}
         <Label>Email</Label>

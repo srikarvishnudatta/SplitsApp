@@ -2,7 +2,7 @@
 import illustration from "/illustration.png"
 function LandingPage(){
    
-    return <div className={"flex justify-between items-center"}>
+    return <div className={"flex justify-between items-center mt-20"}>
             <div className={"flex flex-col  gap-4"}>
                 <h1 className={"font-bold text-7xl"}>Split expenses for free</h1>
                 <p className={"text-2xl font-medium"}>Create. Invite. Split. Settle.</p>

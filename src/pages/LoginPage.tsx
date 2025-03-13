@@ -30,14 +30,16 @@ function LoginPage(){
         <h1 className={"text-2xl font-semibold text-gray-400"}>Log back in</h1>
         {isError && <AuthError message={error.message}/>}
         <form action="" className={"mt-4 flex flex-col gap-3"} onSubmit={handleSubmit(submitHandler)}>
-            <Label>Email</Label>
+            <Label htmlFor={"email"}>Email</Label>
             <Input type={"email"}
+                   id={"email"}
                    placeholder={"your@example.com"}
                    required className={"focus-visible:ring-0"}
                    {...register("email")}
             />
-            <Label>Password</Label>
+            <Label htmlFor={"password"}>Password</Label>
             <Input type={"password"}
+                   id={"password"}
                    placeholder={"password@123"}
                    required className={"focus-visible:ring-0"}
                    {...register("password")}
