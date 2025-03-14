@@ -2,6 +2,7 @@ import { IconType } from "react-icons";
 import { FiDollarSign, FiHome, FiLink, FiPaperclip, FiUsers } from "react-icons/fi";
 import { Link } from "react-router-dom"
 import {useState} from "react";
+import { useUser } from "@/context/userContext";
 
 type RouteValues = {
     id:number;
@@ -30,7 +31,8 @@ const routes: RouteValues[] = [
     {id:5, Icon:FiDollarSign, selected:false, title:"Finance"}
 ]
 function RouteSelect() {
-    const [selected, setSelected] = useState<number>(1)
+    const [selected, setSelected] = useState<number>(1);
+    const {user} = useUser()
     return (
         <div className="space-y-1">
             {routes.map((route) => <NavigationRoute {...route}

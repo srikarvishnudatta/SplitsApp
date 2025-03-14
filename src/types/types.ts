@@ -12,3 +12,9 @@ export interface LoginResponse{
 export interface GenericResponse{
     msg:string;
 }
+export interface ResponseUser{
+    first_name:string;
+    last_name:string;
+    email:string;
+    invitesCount:number;
+}

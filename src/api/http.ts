@@ -23,11 +23,17 @@ export async function verifyUser(path:string){
 export async function resendVerification(email:string){
     await clientAxios.get(`/auth/resendVerify?email=${email}`).then(onSuccess).catch(onError);
 }
-export async function fetchGroups(){
-    const resData : GenericResponse = await clientAxios.get("/group/").then(onSuccess).catch(onError);
-    return resData
-}
-export async function fetchInvites(){
-    const response = await clientAxios.get("/group/invites").then(onSuccess).catch(onError);
+export async function fetchProfile(){
+    // fetch data from /profile
+    const response = await clientAxios.get("/profile").then(onSuccess).catch(onError);
     return response;
+}
+export async function fetchDashboardContext(){
+    // fetch data from /home
+}
+export async function fetchGroups(){
+
+}
+export async function fetchTransactions(){
+    
 }

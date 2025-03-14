@@ -2,7 +2,24 @@ import AccountInfo from "@/components/sidebar/AccountInfo.tsx";
 import Search from "./Search.tsx"
 import RouteSelect from "@/components/sidebar/RouteSelect.tsx";
 import {Logout} from "@/components/sidebar/Logout.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProfile } from "@/api/http.ts";
+import { ResponseUser } from "@/types/types.ts";
+import { useUser } from "@/context/userContext.tsx";
+import { useEffect } from "react";
 function SideBar() {
+    const {setUser} =useUser()
+    const {isError, isSuccess, data} = useQuery<unknown, unknown, ResponseUser>({
+        queryKey: ["profile"],
+        queryFn: fetchProfile,
+    });
+    useEffect(() => {
+        if(isSuccess){
+            setUser(data)
+        }else if(isError){
+            console.log('cant fetch user profile')
+        }
+    }, [isSuccess, data, isError])
     return (
         <div className={"w-1/5"}>
             {/*Sidebar content*/}
