@@ -2,25 +2,25 @@ import { IconType } from "react-icons";
 import { FiDollarSign, FiHome, FiLink, FiPaperclip, FiUsers } from "react-icons/fi";
 import { Link } from "react-router-dom"
 import {useState} from "react";
-import { useUser } from "@/context/userContext";
 
 type RouteValues = {
     id:number;
     selected: boolean;
     Icon: IconType;
     title:string;
-    onClick?: () => void
+    onClick?: () => void;
 }
 
-function NavigationRoute({
+function NavigationRoute({id,
+                    
                    selected, Icon, title, onClick
                }: RouteValues){
-    return <Link to={""} className={"flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow, _background-color,_color] "
+    return <Link to={"/home"} className={"flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow, _background-color,_color] "
         + (selected ? "bg-white text-stone-950 shadow" : "hover:bg-stone-200 bg-transparent text-stone-500 shadow-none")
     }
                  onClick={onClick}
     >
-        <Icon /> {title}
+        <Icon /> {title} <span>0</span>
     </Link>
 }
 const routes: RouteValues[] = [
@@ -32,10 +32,10 @@ const routes: RouteValues[] = [
 ]
 function RouteSelect() {
     const [selected, setSelected] = useState<number>(1);
-    const {user} = useUser()
     return (
         <div className="space-y-1">
             {routes.map((route) => <NavigationRoute {...route}
+                
                 key={route.id} selected={selected === route.id} onClick={() => setSelected(route.id)}/>)}
         </div>
     )

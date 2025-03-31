@@ -1,29 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "./ui/button"
-import logo from "/icons8-money-50.png"
+import {NavLink} from "react-router-dom";
+
 function Header() {
-    const navigate = useNavigate();
+
   return (
-        <header className={"flex justify-between pt-4"}>
-            <div className={"flex items-center gap-2 cursor-pointer"} onClick={() => navigate("/")}>
-                <img src={logo} alt="" className={"self-center"}/>
-                <h2 className={"text-black font-semibold text-2xl"}>
-                    Splits
-                </h2>
-                <Button variant={"link"} className="text-md">
-                    Learn more
-                </Button>
-            </div>
-            <div className="space-x-2">
-            <Button
-                       onClick={() => navigate("/login")}>
-                       Login
-                   </Button>
-                    <Button variant={"outline"} className={"border border-blue-960"}
-                            onClick={() => navigate("/create")}>
-                        Join us Today
-                    </Button>
-            </div>
+        <header>
+            <nav className={"flex justify-between py-4"}>
+                <h2 className={"font-bold italic text-2xl"}><NavLink to={"/"}>Splits</NavLink></h2>
+                <div className={"space-x-2"}>
+                    <NavLink to={"/create"} className={"border border-1 px-4 py-2 border-slate-900 rounded-sm"}>Join Us</NavLink>
+                    <NavLink to={"/login"} className={"border border-1 px-4 py-2 bg-slate-900 text-white rounded-sm font-light"}>Login</NavLink>
+                </div>
+            </nav>
         </header>
   )
 }

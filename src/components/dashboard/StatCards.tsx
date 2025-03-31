@@ -1,6 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import { FiTrendingDown, FiTrendingUp } from "react-icons/fi";
 
 function StatCards() {
+    useQuery({
+        queryKey: ["dashboard"],
+        queryFn: () => {}
+    })
     return (
         <>
             <Card title={"Gross Revenue"} value={"$130,054,24"} pillText={"2.75%"} trend={"up"} period={"From Jan 1st - Jul 31st"} />

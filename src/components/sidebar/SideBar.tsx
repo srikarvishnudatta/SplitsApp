@@ -9,7 +9,7 @@ import { useUser } from "@/context/userContext.tsx";
 import { useEffect } from "react";
 function SideBar() {
     const {setUser} =useUser()
-    const {isError, isSuccess, data} = useQuery<unknown, unknown, ResponseUser>({
+    const {isError, isSuccess, data, isFetching} = useQuery<unknown, unknown, ResponseUser>({
         queryKey: ["profile"],
         queryFn: fetchProfile,
     });
@@ -19,20 +19,20 @@ function SideBar() {
         }else if(isError){
             console.log('cant fetch user profile')
         }
-    }, [isSuccess, data, isError])
+    }, [isSuccess, data, isError]);
     return (
-        <div className={"w-1/5"}>
-            {/*Sidebar content*/}
-            <div className={"overflow-y-scroll sticky top-4 h-[calc(100vh-32px-48px)] px-2"}>
-                <AccountInfo />
-                <Search />
-                <RouteSelect />
-            </div>
-            {/*Logout button*/}
-            <div>
-                <Logout />
-            </div>
+        isFetching ? <p></p> : <div className={"w-1/5"}>
+        {/*Sidebar content*/}
+        <div className={"overflow-y-scroll sticky top-4 h-[calc(100vh-32px-48px)] px-2"}>
+            <AccountInfo />
+            <Search />
+            <RouteSelect />
         </div>
+        {/*Logout button*/}
+        <div>
+            <Logout />
+        </div>
+    </div>
     );
 }
 
