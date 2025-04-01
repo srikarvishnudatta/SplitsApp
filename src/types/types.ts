@@ -18,3 +18,10 @@ export interface ResponseUser{
     email:string;
     invitesCount:number;
 }
+export interface GroupCardType{
+    id: number;
+    title: string;
+    members:string;
+    content:string;
+    link:string;
+}

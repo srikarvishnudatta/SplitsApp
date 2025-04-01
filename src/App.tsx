@@ -2,12 +2,17 @@ import {Route, Routes} from "react-router-dom";
 import LandingPage from "@/pages/LandingPage.tsx";
 import LoginPage from "@/pages/auth/LoginPage";
 import CreateAccountPage from "@/pages/auth/CreateAccountPage";
-import MainLayout from "@/components/layouts/MainLayout";
 import VerifyAccountPage from "@/pages/auth/VerifyAccountPage";
 import RequestNewPasswordPage from "@/pages/auth/RequestNewPasswordPage";
 import NewPasswordPage from "./pages/auth/NewPasswordPage";
-import Dashboard from "@/components/dashboard/Dashboard.tsx";
-import LandingPageLayout from "@/components/layouts/LandingPageLayout.tsx";
+import LandingPageLayout from "@/layouts/LandingPageLayout.tsx";
+import HomePageLayout from "@/layouts/HomePageLayout.tsx";
+import HomePage from "@/pages/home/HomePage.tsx";
+import GroupsPage from "@/pages/GroupsPage.tsx";
+import TransactionsPage from "@/pages/TransactionsPage.tsx";
+import InvitesPage from "@/pages/InvitesPage.tsx";
+import SettingsPage from "@/pages/SettingsPage.tsx";
+import GroupPage from "@/pages/GroupPage.tsx";
 
 
 function App() {
@@ -22,8 +27,15 @@ function App() {
       <Route path={"/auth/password/new"} element={<NewPasswordPage />} />
     </Route>
     {/*Protected Routes*/}
-    <Route path={"/home"} element={<MainLayout />}>
-      <Route index element={<Dashboard />}/>
+    <Route path={"/home"} element={<HomePageLayout/>}>
+      <Route index element={<HomePage/>}/>
+    </Route>
+    <Route element={<HomePageLayout/>}>
+      <Route path={"/groups"} element={<GroupsPage/>} />
+      <Route path={"/groups/:groupId"} element={<GroupPage/>}/>
+      <Route path={"/transactions"} element={<TransactionsPage/>} />
+      <Route path={"/invites"} element={<InvitesPage/>}/>
+      <Route path={"/settings"} element={<SettingsPage/>} />
     </Route>
   </Routes>
 }
