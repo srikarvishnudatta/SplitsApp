@@ -1,26 +1,16 @@
 import GroupCard from "@/components/group/GroupCard.tsx";
-import {GroupCardType} from "@/types/types.ts";
+import { GroupResponseType} from "@/types/types.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {Plus} from "lucide-react";
-
-const data : GroupCardType[] = [
-    {
-        id:1,
-        title:"Home",
-        members:"Srikar Pranu Vicky",
-        content:"+20",
-        link:"/id"
-    },
-    {
-        id:2,
-        title:"Home",
-        members:"Srikar Pranu Vicky",
-        content:"+20",
-        link:"/id"
-    }
-]
+import {useQuery} from "@tanstack/react-query";
+import {fetchGroups} from "@/api/http.ts";
 
 function GroupsPage() {
+    const {data} = useQuery<unknown, unknown, GroupResponseType[]>({
+        queryKey: ["groups"],
+        queryFn: fetchGroups
+    });
+
     return (
         <div className={"mt-5"}>
 
@@ -29,10 +19,13 @@ function GroupsPage() {
                 <Plus/> Create new
             </Button>
             <div className={"flex gap-4 mt-5"}>
-                {data.map((group) => <GroupCard key={group.id} {...group}/>)}
+                {data ? data?.map((group) => <GroupCard
+                    key={group.id}
+                    link={"/groups/"+group.id}
+                    {...group}
+                />): "No groups yet"}
             </div>
         </div>
     );
 }
-
 export default GroupsPage;
