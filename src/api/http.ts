@@ -1,4 +1,4 @@
-import {GenericResponse, LoginResponse, NewUser, User} from "@/types/types.ts";
+import {GenericResponse, GroupResponseType, LoginResponse, NewUser, ProfileType, User} from "@/types/types.ts";
 import clientAxios, {onError, onSuccess} from "@/api/axios.ts";
 
 export async function login(user: User){
@@ -23,16 +23,30 @@ export async function verifyUser(path:string){
 export async function resendVerification(email:string){
     await clientAxios.get(`/auth/resendVerify?email=${email}`).then(onSuccess).catch(onError);
 }
-export async function fetchProfile(){
+export async function fetchProfile(token:string){
     // fetch data from /profile
-    const response = await clientAxios.get("/profile").then(onSuccess).catch(onError);
+    const response:ProfileType = await clientAxios.get("/profile", {
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    }).then(onSuccess).catch(onError);
     return response;
 }
 export async function fetchDashboardContext(){
     // fetch data from /home
 }
 export async function fetchGroups(){
-
+    const groups: GroupResponseType[] = await clientAxios.get("/groups").then(onSuccess).catch(onError);
+    return groups;
+}
+export async function fetchGroupById(groupId:string){
+    return await clientAxios.get("/groups/"+groupId).then(onSuccess).catch(onError);
+}
+export async function createGroup(group_name:string){
+    await clientAxios.post("/groups/new", {group_name}).then(onSuccess).catch(onError);
+}
+export async function deleteGroup(group_id:string){
+    await clientAxios.delete("/groups/"+group_id).then(onSuccess).catch(onError);
 }
 export async function fetchTransactions(){
     

@@ -1,8 +1,9 @@
 import illustration from "/bg_illustration.svg"
 import {NavLink} from "react-router-dom";
 import {ArrowRight} from "lucide-react";
+
 function LandingPage(){
-   
+
     return <div className={"flex "}>
             <div className={"w-3/5 self-center space-y-3"}>
                 <h1 className={"font-bold text-7xl"}>Split Expenses for free</h1>
