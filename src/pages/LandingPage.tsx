@@ -1,22 +1,17 @@
-import illustration from "/bg_illustration.svg"
-import {NavLink} from "react-router-dom";
-import {ArrowRight} from "lucide-react";
-
 function LandingPage(){
 
-    return <div className={"flex "}>
-            <div className={"w-3/5 self-center space-y-3"}>
-                <h1 className={"font-bold text-7xl"}>Split Expenses for free</h1>
-                <p className={"text-2xl font-medium"}>Create. Invite. Split. Settle.</p>
-                <div className={"flex gap-2 py-2"}>
-                    <NavLink to={"/login"} className={"flex items-center border border-1 border-black px-2 py-2"}>Join us <ArrowRight size={16}/></NavLink>
-                    <NavLink to={"/about"} className={"flex bg-black text-white p-2"}>Learn more </NavLink>
-                </div>
-            </div>
-        <div className={"w-2/5 self-center"}>
-            <img src={illustration} alt="background_illustration"/>
-        </div>
-        </div>
+    return <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
+    Split expenses for free?{" "}
+    <br />
+    <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
+      <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
+        <span className="">Try SplitsApp.</span>
+      </div>
+      <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
+        <span className="">Try SplitsApp.</span>
+      </div>
+    </div>
+  </h2>
 }
 
 export default LandingPage;
