@@ -1,4 +1,13 @@
-import { LoginData, LoginResponse, SignupData } from "@/types/types";
+import {
+    GroupData,
+    InviteData,
+    InvitesType,
+    LoginData,
+    LoginResponse,
+    NewGroupType,
+    PostResponse,
+    SignupData
+} from "@/types/types";
 
 const BASE_URL = "http://localhost:4000/";
 
@@ -29,7 +38,8 @@ async function login(loginData: LoginData){
 async function signUp(signUpData: SignupData){
     try{
         const resposne = await myFetch(BASE_URL + "auth/signup", signUpData, "POST");
-        return await resposne.json();
+        const resData: PostResponse = await resposne.json();
+        return resData;
     }catch(error){
         console.log(error);
     }
@@ -42,5 +52,41 @@ async function fetchHome(){
         }
         return await response.json();
 }
-
-export { login, signUp, fetchHome}
+async function createGroup(data: NewGroupType):Promise<PostResponse>{
+    const at = localStorage.getItem("accessToken") || '';
+    const response = await myFetch(BASE_URL + "groups/new",data,"POST",at );
+    if (response.status === 401){
+        return Promise.reject({message: "Invalid Access Token"});
+    }
+    return await response.json();
+}
+async function sendInvite(inviteData: InviteData):Promise<PostResponse>{
+    const at = localStorage.getItem("accessToken") || '';
+    const response = await myFetch(BASE_URL + "groups/invite", inviteData, "POST", at);
+    return await response.json();
+}
+async function fetchGroup(groupId:string):Promise<GroupData>{
+    const at = localStorage.getItem("accessToken") || '';
+    const response = await myFetch(BASE_URL + "groups/"+groupId, undefined, "GET", at);
+    if (response.status === 401){
+        return Promise.reject({message: "Invalid Access Token"});
+    }
+    return await response.json();
+}
+async function fetchAllInvites():Promise<{invites: InvitesType[]}>{
+    const at = localStorage.getItem("accessToken") || '';
+    const response = await myFetch(BASE_URL + "groups/invites", undefined, "GET", at);
+    if (response.status === 401){
+        return Promise.reject({message: "Invalid Access Token"});
+    }
+    return await response.json();
+}
+async function acceptInvite(groupId:number){
+    const at = localStorage.getItem("accessToken") || '';
+    const response = await myFetch(BASE_URL + "groups/invites/accept/"+groupId,undefined, "GET", at);
+    if (response.status === 401){
+        return Promise.reject({message: "Invalid Access Token"});
+    }
+    return await response.json();
+}
+export { login, signUp, fetchHome, createGroup, sendInvite, fetchGroup, fetchAllInvites, acceptInvite}

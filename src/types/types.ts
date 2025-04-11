@@ -6,13 +6,15 @@ export interface ProfileType{
     email:string;
     invitesCount:number;
 }
-
 export interface GroupData{
     group_id:number;
     name:string;
-    owner:number;
+    owner:boolean;
     members: number[];
     created_at:string;
+}
+export interface NewGroupType{
+    group_name:string;
 }
 export interface HomeType{
     groupData: GroupData[]
@@ -32,7 +34,17 @@ export interface SignupData{
 }
 export interface PostResponse{
     message:string;
+    id?:number;
 }
 export interface ErrorType{
     message:string;
+}
+export interface InviteData{
+    groupId:number;
+    receiver:string;
+}
+export interface InvitesType{
+    groupId: number
+    groupName: string
+    senderName: string
 }
