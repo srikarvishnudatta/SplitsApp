@@ -1,46 +1,55 @@
-import { fetchHome } from "@/api/api";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import {ErrorType, GroupData, HomeType} from "@/types/types.ts";
-
+// import { fetchHome } from "@/api/api";
+// import { useQuery } from "@tanstack/react-query";
+// import { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import {ErrorType, GroupData, HomeType} from "@/types/types.ts";
+import HomeHeader from "@/components/homepage/Header";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@radix-ui/react-dropdown-menu";
+import { ChevronDown } from "lucide-react";
 function HomePage() {
-    const {data, error} = useQuery<unknown, ErrorType, HomeType>({
-        queryKey: ["home"],
-        queryFn: fetchHome,
-        retry:false
-    });
-    const navigate = useNavigate();
-    useEffect(() => {
-        if(error?.message === "Invalid Access Token") {
-            console.log(error);
-            localStorage.clear()
-            navigate("/login");
-        }
-    }, [error]);
-    console.log(data?.groupData)
-    return (
-            <section className={"grow"}>
-                <h1 className={"text-4xl my-2"}>Your Groups</h1>
-                <p className={"text-gray-500"}>
-                    You can view all your groups here
-                </p>
-               <div className={"space-y-2"}>
-                   {data?.groupData.map((group) => <Group key={group.group_id} {...group}/>
-                       )}
-               </div>
-            </section>
-    );
+  // const {data, error} = useQuery<unknown, ErrorType, HomeType>({
+  //     queryKey: ["home"],
+  //     queryFn: fetchHome,
+  //     retry:false
+  // });
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //     if(error?.message === "Invalid Access Token") {
+  //         console.log(error);
+  //         localStorage.clear()
+  //         navigate("/login");
+  //     }
+  // }, [error]);
+  // console.log(data?.groupData)
+  return (
+    <main className="flex min-h-screen flex-col max-w-7xl mx-auto">
+      <HomeHeader />
+      <div className="flex items-center justify-between my-6">
+        <h1 className="text-2xl font-bold">Your Groups</h1>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm">
+              Sort by <ChevronDown className="ml-1 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Most recent</DropdownMenuItem>
+            <DropdownMenuItem>Alphabetical</DropdownMenuItem>
+            <DropdownMenuItem>Highest balance</DropdownMenuItem>
+            <DropdownMenuItem>Most active</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        
+      </div>
+    </main>
+  );
 }
-function Group(props:GroupData){
-    return <div  className={"p-4 border-1 border-gray-300 rounded-xl"}>
-        <h3 className={"text-lg font-bold"}>{props.name}</h3>
-        <p className={"italic"}>Admin {props.owner ? "Yes":"No"}</p>
-        <p>Created on {new Date(props.created_at).toDateString()}</p>
-        <div>
-            Members: {props.members.map((member,index) => <span key={index}>{member}</span> )}
-        </div>
-    </div>
-}
-
 export default HomePage;
