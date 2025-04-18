@@ -9,7 +9,7 @@ import {
     SignupData
 } from "@/types/types";
 
-const BASE_URL = "http://localhost:4000/";
+const BASE_URL = "http://localhost:8080/";
 
 async function myFetch<T>(url:string, body?:T, method = "GET", accessToken?:string, options?:RequestInit){
     const headers = new Headers({

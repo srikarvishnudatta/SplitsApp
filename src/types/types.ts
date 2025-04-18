@@ -15,6 +15,7 @@ export interface GroupData{
 }
 export interface NewGroupType{
     group_name:string;
+    description:string;
 }
 export interface HomeType{
     groupData: GroupData[]

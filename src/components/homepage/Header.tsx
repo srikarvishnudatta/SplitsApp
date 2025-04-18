@@ -39,14 +39,14 @@ function HomeHeader(){
           <NavLink to={"/app/new-expense"}><span>Add Expense</span></NavLink>
         </Button>
 
-        <Button size="sm" className="hidden md:flex gap-1 bg-teal-500 hover:bg-teal-600">
+        <Button size="sm" className="hidden md:flex gap-1 text-white bg-purple-500 hover:bg-purple-600">
           <Plus className="h-4 w-4" />
           <NavLink to={"/app/new-group"}><span>New Group</span></NavLink>
         </Button>
 
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
-          <span className="absolute top-1 right-1 flex h-2 w-2 rounded-full bg-teal-500"></span>
+          <span className="absolute top-1 right-1 flex h-2 w-2 rounded-full bg-purple-500"></span>
         </Button>
 
         <DropdownMenu>

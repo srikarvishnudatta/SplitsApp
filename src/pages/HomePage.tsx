@@ -3,7 +3,6 @@
 // import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import {ErrorType, GroupData, HomeType} from "@/types/types.ts";
-import HomeHeader from "@/components/homepage/Header";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -28,8 +27,7 @@ function HomePage() {
   // }, [error]);
   // console.log(data?.groupData)
   return (
-    <main className="flex min-h-screen flex-col max-w-7xl mx-auto">
-      <HomeHeader />
+    <>
       <div className="flex items-center justify-between my-6">
         <h1 className="text-2xl font-bold">Your Groups</h1>
         <DropdownMenu>
@@ -47,9 +45,9 @@ function HomePage() {
         </DropdownMenu>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        
+        {/* render groups here */}
       </div>
-    </main>
+    </>
   );
 }
 export default HomePage;
