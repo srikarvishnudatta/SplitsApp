@@ -8,11 +8,11 @@ import Layout from "./components/homepage/Layout";
 function App() {
   return <Routes>    
         <Route path="/" element={<LandingPage/>}/>
-        <Route path="app" element={<Layout/>}>
+        <Route path="/app" element={<Layout/>}>
           <Route index element={<HomePage />}/>
-          <Route path="test" element={<HomePageTest />}/>
-          <Route path="groups/:groupId" element={<GroupDetailPage/>}/>
-          <Route path="new-group" element={<NewGroupPage />}/>
+          <Route path="/app/test" element={<HomePageTest />}/>
+          <Route path="/app/groups/:groupId" element={<GroupDetailPage/>}/>
+          <Route path="/app/new-group" element={<NewGroupPage />}/>
         </Route>
   </Routes>
 }

@@ -7,11 +7,12 @@ import { GroupData } from "@/types/types"
 
 function GroupCard(group: GroupData) {
   return (
-    <NavLink to={`/app/groups/${group.group_id}`} key={group.group_id} className="block">
+    <NavLink to={`/app/groups/${group.groupId}`} key={group.groupId} className="block">
                 <Card className="h-full hover:shadow-md transition-shadow border-1 border-gray-100">
                   <CardHeader className="pb-2">
                     <CardTitle className="flex justify-between items-start">
-                      <span>{group.name}</span>
+                      <span>{group.groupName}</span>
+                      <p>{group.description}</p>
                       {/* {group.youOwe > 0 ? (
                         <Badge variant="destructive" className="bg-red-500">You owe ${group.youOwe.toFixed(2)}</Badge>
                       ) : group.owedToYou > 0 ? (
@@ -41,8 +42,8 @@ function GroupCard(group: GroupData) {
                       <span className="text-sm text-muted-foreground">{group.members.length} members</span>
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      <p>Last activity: {group.created_at}</p>
-                      <p>{group.owner ? "admin": "not admin"}</p>
+                      <p>Last activity: {group.createdOn}</p>
+                      {/* <p>{group.owner ? "admin": "not admin"}</p> */}
                     </div>
                   </CardContent>
                   <CardFooter className="pt-0">

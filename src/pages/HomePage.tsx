@@ -3,29 +3,30 @@
 // import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import {ErrorType, GroupData, HomeType} from "@/types/types.ts";
+import { fetchGroups } from "@/api/network";
+import GroupCard from "@/components/homepage/GroupCard";
 import { Button } from "@/components/ui/button";
+import { GroupData } from "@/types/types";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@radix-ui/react-dropdown-menu";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 function HomePage() {
-  // const {data, error} = useQuery<unknown, ErrorType, HomeType>({
-  //     queryKey: ["home"],
-  //     queryFn: fetchHome,
-  //     retry:false
-  // });
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //     if(error?.message === "Invalid Access Token") {
-  //         console.log(error);
-  //         localStorage.clear()
-  //         navigate("/login");
-  //     }
-  // }, [error]);
-  // console.log(data?.groupData)
+  const {getAccessTokenSilently} = useAuth0();
+  const fetchGroupsWrapper = async () =>{
+    const accessToken = await getAccessTokenSilently();
+    return fetchGroups(accessToken)
+  }
+  const {data, isFetching} = useQuery<unknown, unknown, GroupData[]>({
+    queryKey:["groups"],
+    queryFn: fetchGroupsWrapper
+  });
+  
   return (
     <>
       <div className="flex items-center justify-between my-6">
@@ -46,6 +47,9 @@ function HomePage() {
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {/* render groups here */}
+        {isFetching ? <p>Fetching group data</p>: (
+          data?.map((group) => <GroupCard {...group}/>)
+        )}
       </div>
     </>
   );

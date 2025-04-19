@@ -2,11 +2,8 @@ import {
     GroupData,
     InviteData,
     InvitesType,
-    LoginData,
-    LoginResponse,
     NewGroupType,
     PostResponse,
-    SignupData
 } from "@/types/types";
 
 const BASE_URL = "http://localhost:8080/";
@@ -26,24 +23,7 @@ async function myFetch<T>(url:string, body?:T, method = "GET", accessToken?:stri
         ...options,
     });
 }
-async function login(loginData: LoginData){
-    try {
-        const response = await myFetch(BASE_URL+"auth/login",loginData, "POST");
-        const resData : LoginResponse =  await response.json();
-        localStorage.setItem("accessToken", resData.accessToken);
-    } catch (error) {
-        console.log(error);
-    }
-}
-async function signUp(signUpData: SignupData){
-    try{
-        const resposne = await myFetch(BASE_URL + "auth/signup", signUpData, "POST");
-        const resData: PostResponse = await resposne.json();
-        return resData;
-    }catch(error){
-        console.log(error);
-    }
-}
+
 async function fetchHome(){
     const at = localStorage.getItem("accessToken") || '';
         const response = await myFetch(BASE_URL + "home", undefined, "GET", at);
@@ -89,4 +69,4 @@ async function acceptInvite(groupId:number){
     }
     return await response.json();
 }
-export { login, signUp, fetchHome, createGroup, sendInvite, fetchGroup, fetchAllInvites, acceptInvite}
+export {fetchHome, createGroup, sendInvite, fetchGroup, fetchAllInvites, acceptInvite}

@@ -1,5 +1,5 @@
 import {GenericResponse, GroupResponseType, LoginResponse, NewUser, ProfileType, User} from "@/types/types.ts";
-import clientAxios, {onError, onSuccess} from "@/api/axios.ts";
+import clientAxios, {onError, onSuccess} from "@/legacy/axios";
 
 export async function login(user: User){
     const resData: LoginResponse = await clientAxios.post("/auth/login", user).then(onSuccess).catch(onError);

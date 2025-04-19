@@ -7,15 +7,16 @@ export interface ProfileType{
     invitesCount:number;
 }
 export interface GroupData{
-    group_id:number;
-    name:string;
-    owner:boolean;
+    groupId:number;
+    groupName:string;
+    description:string;
+    // owner:boolean;
     members: number[];
-    created_at:string;
+    createdOn:string;
 }
 export interface NewGroupType{
-    group_name:string;
-    description:string;
+    groupName:string;
+    groupDescription:string;
 }
 export interface HomeType{
     groupData: GroupData[]
