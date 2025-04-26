@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@theme{
+    --color-primary: #fd4c55;
+}
+.bg-gradient{
+    background: linear-gradient(to right, #ff7e29 0%, #ff357f 100%);
+}
+.gradient-text{
+    background: linear-gradient(to right, #ff7e29 0%, #ff357f 100%);
+    color:transparent;
+    background-clip: text;
+}
+.animate-slide-up{
+    animation: slideInUp 0.5s ease-out forwards;
+}
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}  
+@keyframes slideInUp {
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -38,6 +38,6 @@ async function sendInvite(inviteData:InviteData, accessToken:string){
     return await postFetch("api/groups/invite", inviteData, accessToken);
 }
 async function fetchGroups(accessToken:string){
-    return await getFetch("api/groups", accessToken);
+    return await getFetch("api/groups/", accessToken);
 }
 export {createGroup, sendInvite, fetchGroups}

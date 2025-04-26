@@ -1,6 +1,7 @@
 import { Wallet } from "lucide-react"
 import { NavLink } from "react-router"
 import { Button } from "../ui/button"
+import logo from "./logo.svg"
 
 type SectionProps = {
     login: () => void
@@ -11,6 +12,7 @@ function Header({login} : SectionProps){
             <div className="flex items-center gap-2">
               <Wallet className="h-6 w-6 text-purple-500" />
               <span className="text-xl font-bold">SplitsApp</span>
+              <img src={logo} alt="" height={200} width={200}/>
             </div>
             <nav className="hidden md:flex gap-6">
               <NavLink to="#features" className="text-sm font-medium hover:text-purple-500 transition-colors">

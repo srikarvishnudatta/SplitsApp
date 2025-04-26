@@ -10,7 +10,7 @@ function LandingPage(){
   const login = () =>{
     loginWithRedirect();
   }
-    return <main className="flex min-h-screen flex-col mx-auto max-w-7xl">
+    return <main className="flex min-h-screen flex-col mx-auto max-w-7xl ">
       <Header login={login}/>
       <HeroSection login={login}/>
       <FeaturesSection />

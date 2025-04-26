@@ -7,7 +7,6 @@ import { fetchGroups } from "@/api/network";
 import GroupCard from "@/components/homepage/GroupCard";
 import { Button } from "@/components/ui/button";
 import { GroupData } from "@/types/types";
-import { useAuth0 } from "@auth0/auth0-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,

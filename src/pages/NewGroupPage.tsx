@@ -7,13 +7,11 @@ import {FormEvent, useState} from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function NewGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
     const [receiver, setReceiver] = useState('');
-    const {getAccessTokenSilently} = useAuth0();
     const {data, isError, isSuccess, mutate, error} = useMutation<PostResponse, ErrorType, {
         body:NewGroupType,
         accessToken:string
@@ -30,6 +28,7 @@ function NewGroupPage() {
     })
     async function submitHandler(ev: FormEvent<HTMLFormElement>){
         ev.preventDefault();
+        console.log("Submitting event")
         const accessToken = await getAccessTokenSilently();
         mutate({body: {groupName, groupDescription}, accessToken})
     }
@@ -66,7 +65,8 @@ function NewGroupPage() {
                         onChange={(e) => setGroupDescription(e.target.value)}
                         rows={3}
                        />
-                <Button className={"bg-purple-400 text-white"}>
+                <Button className={"bg-purple-400 text-white"}
+                >
                     Submit
                 </Button>
             </form>
