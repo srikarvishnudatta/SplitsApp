@@ -1,38 +1,27 @@
 import {Label} from "@/components/ui/label.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useMutation} from "@tanstack/react-query";
-import { createGroup, sendInvite } from "@/api/api_v2";
-import {ErrorType, InviteData, NewGroupResponse, NewGroupType} from "@/types/types.ts";
+import { createGroup } from "@/api/api_v2";
+import {ErrorType, NewGroupResponse, NewGroupType} from "@/types/types.ts";
 import {FormEvent, useState} from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
-import InvitationForm from "@/components/Invitation";
+import InvitationForm from "@/components/InvitationForm";
 
 function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
-    const [receiver, setReceiver] = useState('');
     const {accessToken} = useAuth();
     const {data, isError, isSuccess, mutate} = useMutation<NewGroupResponse, ErrorType, NewGroupType
     >({
         mutationFn: (data) => createGroup(accessToken || '', data),
         onSuccess: () => toast("Group Created Successfully!")
     });
-    const {mutate : inviteMutate, isError: inviteError, isSuccess: inviteSuccess} = useMutation<unknown, ErrorType, InviteData>({
-        mutationFn: (data) => sendInvite(accessToken || '', data),
-        onSuccess: () => toast("Invite Sent Successfully!")
-    })
     async function submitHandler(ev: FormEvent<HTMLFormElement>){
         ev.preventDefault();
         mutate({groupName, groupDescription});
-    }
-    async function inviteHandler(ev: FormEvent<HTMLFormElement>){
-        ev.preventDefault();
-        if(data){
-            inviteMutate({groupId: data.groupId, receiver});
-        }
     }
     if (isError) {
         return <p>Error has occurred. Please try refreshing the page.</p>
@@ -63,13 +52,7 @@ function CreateGroupPage() {
                     Submit
                 </Button>
             </form>
-            {isSuccess && <InvitationForm 
-            inviteError={inviteError}
-            inviteSuccess={inviteSuccess}
-            receiver={receiver}
-            setReceiver={setReceiver}
-            inviteHandler={inviteHandler}
-            />}
+            {isSuccess && <InvitationForm groupId={data.groupId}/>}
         </section>
     );
 }

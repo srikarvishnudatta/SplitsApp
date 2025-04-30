@@ -12,11 +12,10 @@ function HomePage() {
   const {accessToken} = useAuth();
   const {error, data, isFetching} = useQuery<unknown, unknown, GroupData[]>({
     queryKey: ["groups"],
-    queryFn: () => allGroups(accessToken || '')
+    queryFn: () => allGroups(accessToken || ''),
   });
   if(isFetching) return <p>Fetching your groups</p>;
   if(error) return <p>Cannot display content</p>
-  console.log(data);
   return (
     <section className="px-4 sm:px-6 lg:px-2 ">
       <div className="mt-25 flex justify-between">
@@ -29,12 +28,11 @@ function HomePage() {
           <Button ><Plus /><NavLink to={"/app/new-group"}>New Group</NavLink></Button>
         </div>
       </div>
-      
-      <div className="">
+      <div>
         {data?.map((group) => <GroupCard {...group} key={group.id}/>)}
       </div>
     </section>
-  )
+  );
 }
 
 export default HomePage;

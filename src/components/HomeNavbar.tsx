@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
-import {  Menu, User, X, Home, Settings, Wrench, PlusCircle } from "lucide-react";
+import {  Menu, User, X, Home, Settings, Wrench, PlusCircle, MailOpen, MailCheck } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,13 +12,15 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { logout } from "@/lib/firebase";
-import InviteDropDown from "./InviteDropDown";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/context/AuthContext";
+import { invitationCount } from "@/api/api_v2";
 
 function HomeNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [isInviteOpen, setIsInviteOpen] = useState(false);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const {accessToken} = useAuth();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -26,6 +28,10 @@ function HomeNavbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const {data, isSuccess} = useQuery({
+    queryKey:["invites-count"],
+    queryFn: () => invitationCount(accessToken || '')
+  })
   async function logoutUser(){
     await logout();
     navigate("/");
@@ -47,12 +53,14 @@ function HomeNavbar() {
             <NavLink to={"/app/new-group"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300 ${isActive ? "text-secondary border-b" : "text-white border-none"}`}><PlusCircle size={16}/> New Group</NavLink>
             {/* TODO: make this a button */}
             <NavLink to={"#features"} className={"flex items-center hover:text-secondary transition-all duration-300"}><PlusCircle size={16}/> Add Expense</NavLink>
-            <InviteDropDown open={isInviteOpen} openTrigger={() => setIsInviteOpen((prev) => !prev)}/>
+            <NavLink to={"/app/invitations"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300 ${isActive ? "text-secondary border-b" : "text-white border-none"}`}>
+            {isSuccess && data?.count > 0 ? <MailCheck size={16}/> :<MailOpen size={16}/>}
+            Invites</NavLink>
             <DropdownMenu >
               <DropdownMenuTrigger>
-                <Button className="bg-back-lt border border-secondary text-secondary hover:bg-secondary/20">
-                  <User /> Account
-                </Button>
+                <div className="bg-back-lt flex items-center px-2 py-1 rounded-md border border-secondary text-secondary hover:bg-secondary/20">
+                  <User size={16}/> Account
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-back-lt mr-6 mt-2">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>

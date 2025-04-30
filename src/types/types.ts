@@ -2,7 +2,13 @@ export interface GroupData{
     id:number;
     groupName:string;
     groupDescription:string;
-    members:string[];
+    members:MemberType[];
+    isAdmin:boolean;
+}
+export interface MemberType{
+    firstName:string;
+    lastName:string;
+    email:string;
 }
 export interface NewGroupType{
     groupName:string;
@@ -30,9 +36,8 @@ export interface InviteData{
 }
 export interface InvitationResponse{
     id:number;
-    groupId: number
-    groupName: string
-    email: string
+    groupName: string;
+    email: string;
     status: number;
 }
 export interface InvitationStatusType{
@@ -40,6 +45,8 @@ export interface InvitationStatusType{
     status:number;
 }
 export interface CreateUserType{
-    Id:string;
-    Email:string;
+    id:string;
+    email:string;
+    firstName:string;
+    lastName:string;
 }

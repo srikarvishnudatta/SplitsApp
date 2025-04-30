@@ -72,7 +72,18 @@ async function allInvites(accessToken:string){
     if(!response.ok) throw new Error("Something went wrong");
     return await response.json();
 }
-async function acceptInvite(accessToken:string, data:InvitationStatusType){
+async function invitationCount(accessToken:string): Promise<{count: number}>{
+    const response = await fetch(BASE_URL + "invitations/count",{
+        headers:{
+            "Content-type":"application/json",
+            Authorization:`Bearer ${accessToken}`
+        },
+        method:"GET"
+    });
+    if(!response.ok) throw new Error("Something went wrong");
+    return await response.json();
+}
+async function updateInvite(accessToken:string, data:InvitationStatusType){
     const response = await fetch(BASE_URL + "invitations/"+data.id,{
         headers:{
             "Content-type":"application/json",
@@ -83,4 +94,4 @@ async function acceptInvite(accessToken:string, data:InvitationStatusType){
     });
     if(!response.ok) throw new Error("invalid status")
 }
-export {createUser, createGroup, allGroups, groupById, sendInvite, allInvites, acceptInvite};
+export {createUser, createGroup, allGroups, groupById, sendInvite, invitationCount, allInvites, updateInvite};

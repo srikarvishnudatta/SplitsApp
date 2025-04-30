@@ -3,14 +3,14 @@ import { ChevronRight, Users } from "lucide-react"
 import { NavLink } from "react-router"
 
 
-function GroupCard({id, groupDescription, groupName, members}:GroupData) {
+function GroupCard({id, groupDescription, groupName, members, isAdmin}:GroupData) {
   return (
     <div className="bg-back-lt border border-gray-600 rounded-sm py-2 px-4 hover:bg-primary/5">
         <NavLink to={`/app/${id}`} className={"flex justify-between"}>
         <div className="space-y-2">
         <h2 className="text-2xl text-semibold flex items-center gap-2">
           <span>{groupName}</span>
-          <span className="bg-green-500 text-xs rounded-2xl px-2 py-1 ">Admin</span>
+          {isAdmin && <span className="bg-green-500 text-xs rounded-2xl px-2 py-1 ">Admin</span>}
         </h2>
         <p className="text-sm">{groupDescription}</p>
         <div className="flex justify-between gap-10">

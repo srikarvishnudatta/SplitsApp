@@ -30,7 +30,7 @@ async function signUp(data: SignupData){
         await updateProfile(user, {
             displayName: `${data.first_name} ${data.last_name}`
         });
-        await createUser({Id: user.uid, Email: user.email!});
+        await createUser({id: user.uid, email: user.email!, firstName: data.first_name, lastName: data.last_name});
         return user;
     } catch (error) {
         throw error
