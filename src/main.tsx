@@ -6,15 +6,16 @@ import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "./context/AuthContext.tsx";
 
-const client = new QueryClient()
+const client = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
-  <AuthProvider>
     <QueryClientProvider client={client}>
       <BrowserRouter>
+      <AuthProvider>
         <App />
         <Toaster />
+        </AuthProvider>
       </BrowserRouter>
   </QueryClientProvider>
-  </AuthProvider>
+
 );

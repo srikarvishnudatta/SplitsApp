@@ -1,4 +1,4 @@
-import NavBar from "@/components/new/NavBar";
+import NavBar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -9,7 +9,8 @@ import {
   UsersRound,
 } from "lucide-react";
 import { NavLink } from "react-router";
-import image from "./image.png";
+import image from "@/assets/image.png";
+import { testimonials } from "@/lib/constants";
 
 const features = [
   {
@@ -44,34 +45,9 @@ const features = [
   },
 ];
 
-const testimonials = [
-  {
-    name: "Alex Johnson",
-    role: "Roommate",
-    content:
-      "SplitWise transformed how we manage our household expenses. No more awkward money conversations!",
-    avatar:
-      "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=120",
-  },
-  {
-    name: "Mia Williams",
-    role: "Traveler",
-    content:
-      "Used this during our trip to Europe with friends. It was so easy to track shared expenses across different currencies.",
-    avatar:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=120",
-  },
-  {
-    name: "David Chen",
-    role: "Student",
-    content:
-      "Perfect for our student house. We can see who owes what at a glance, and it's helped avoid so many conflicts.",
-    avatar:
-      "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=120",
-  },
-];
 
-function LandingPageNew() {
+
+function LandingPage() {
   return (
     <main className="min-h-screen flex flex-col max-w-7xl mx-auto">
       <NavBar />
@@ -181,5 +157,4 @@ function LandingPageNew() {
     </main>
   );
 }
-
-export default LandingPageNew;
+export default LandingPage;

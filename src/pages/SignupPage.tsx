@@ -5,13 +5,14 @@ import { SignupData } from "@/types/types";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { EyeOff, Eye, CheckCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { NavLink } from "react-router";
-import logo from "./logo.svg";
+import { NavLink, useNavigate } from "react-router";
+import logo from "@/assets/logo.svg";
 
 
 function SignupPage() {
   const [formData, setFormData] = useState<SignupData>({email:"", password:"", first_name:"", last_name:""});
  const [viewPassword, setViewPassword] = useState(false);
+ const navigate = useNavigate();
  const [error, setError] = useState({
   email:false,
   password:false,
@@ -69,8 +70,8 @@ function SignupPage() {
       }
   }
   try {
-      const response = await signUp({...formData});
-      console.log(response);
+      await signUp({...formData});
+      navigate("/app");
   } catch (error) {
       setError({
           email:true,
@@ -110,7 +111,7 @@ return (
         </div>
       </div>
     </div>
-    <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+    <div className="w-full lg:w-1/2 md:flex items-center justify-center p-6">
       <div>
         <div className="mb-8 text-center">
         <img src={logo} alt="" height={120} width={200} className="ml-[-10px]"/>
@@ -125,8 +126,8 @@ return (
 
         <form className="space-y-3" onSubmit={submitHandler}>
 
-          <div className="flex gap-4">
-          <div>
+          <div className="md:flex md:gap-4 space-y-3 md:space-y-0">
+          <div className="space-y-3">
           <Label>First Name</Label>
           <Input placeholder="John" type="text"
           className={error.first_name ? "border-red-500": undefined}
@@ -134,7 +135,7 @@ return (
           onChange={(e) => setFormData({...formData, first_name: e.target.value})}
           />
           </div>
-         <div>
+         <div className="space-y-3">
          <Label>Last Name</Label>
           <Input placeholder="Doe" type="text"
           className={error.last_name ? "border-red-500": undefined}
