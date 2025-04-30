@@ -49,10 +49,9 @@ const features = [
 
 function LandingPage() {
   return (
-    <main className="min-h-screen flex flex-col max-w-7xl mx-auto">
-      <NavBar />
+    <><NavBar /><main className="min-h-screen flex flex-col max-w-7xl mx-auto">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-32 pb-20 px-4 ">
         <div className=" text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
             Split Expenses <span className="gradient-text">Effortlessly</span>
@@ -63,7 +62,7 @@ function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
             <NavLink to="/signup">
-              <Button size="lg" className="text-white">
+              <Button size="lg" className="text-white cursor-pointer">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -141,8 +140,7 @@ function LandingPage() {
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full mr-4"
-                />
+                  className="w-12 h-12 rounded-full mr-4" />
                 <div>
                   <h4 className="font-semibold">{testimonial.name}</h4>
                   <p className="text-sm text-muted-foreground">
@@ -154,7 +152,7 @@ function LandingPage() {
           ))}
         </div>
       </section>
-    </main>
+    </main></>
   );
 }
 export default LandingPage;

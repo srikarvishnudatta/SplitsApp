@@ -8,7 +8,7 @@ import { Plus, Receipt, Settings, Trash, Users } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useParams } from "react-router";
 
-function GroupPage() {
+function GroupDetailPage() {
   const [selected, setSelected] = useState('expenses');
   const params = useParams();
   const groupId = params.groupId;
@@ -96,4 +96,4 @@ function GroupSettings(){
     group settings
   </div>
 }
-export default GroupPage;
+export default GroupDetailPage;

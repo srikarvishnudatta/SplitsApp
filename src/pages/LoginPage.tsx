@@ -14,6 +14,7 @@ function LoginPage() {
     password: "",
   });
   const [viewPassword, setViewPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState({
     email: false,
@@ -21,6 +22,7 @@ function LoginPage() {
     message: "",
   });
   async function submitHandler(ev: FormEvent<HTMLFormElement>) {
+    setIsSubmitting(true);
     ev.preventDefault();
     if (!formData.email) {
       setError((prev) => ({
@@ -30,6 +32,7 @@ function LoginPage() {
       }));
     }
     if (!formData.password) {
+      setIsSubmitting(false);
       setError((prev) => ({
         ...prev,
         password: true,
@@ -38,6 +41,7 @@ function LoginPage() {
       return;
     } else {
       if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        setIsSubmitting(false);
         setError((prev) => ({
           ...prev,
           email: true,
@@ -50,6 +54,7 @@ function LoginPage() {
       await signIn({ ...formData });
       navigate("/app");
     } catch (error) {
+      setIsSubmitting(false);
       setError({
         email: true,
         password: true,
@@ -96,7 +101,7 @@ function LoginPage() {
         </div>
       </div>
       <div className="w-full lg:w-1/2 md:flex items-center justify-center p-6">
-        <div>
+        <div className="border p-8 rounded-xl border-gray-400/90">
           <div className="mb-8 text-center">
             <img
               src={logo}
@@ -126,7 +131,7 @@ function LoginPage() {
               }
             />
             {error.email && (
-              <p className="text-red-400 text-xs">{error.message}</p>
+              <p className="text-red-400/90 text-xs">{error.message}</p>
             )}
             <Label>Password</Label>
             <div className="relative">
@@ -140,26 +145,36 @@ function LoginPage() {
                 }
               />
               <Button
-                className="absolute right-3 top-1 bg-white h-6 w-6"
+                className="absolute right-3 top-1 bg-back h-6 w-6"
                 type="button"
                 onClick={() => setViewPassword((prev) => !prev)}
                 variant={"secondary"}
+                
               >
                 {viewPassword ? <EyeOff /> : <Eye />}
               </Button>
             </div>
             {error.password && (
-              <p className="text-red-400 text-xs">{error.message}</p>
+              <p className="text-red-400/90 text-xs">{error.message}</p>
             )}
-            <p className="text-right">
+    
+              <div>
+              <NavLink
+                to={"/signup"}
+                className="block text-right text-white/90 text-xs hover:underline hover:text-white transition-all duration-300"
+              >
+                Don't have an account?
+              </NavLink>
+          
               <NavLink
                 to={"/"}
-                className="text-primary/70 text-sm hover:underline hover:text-primary"
+                className="block text-right pt-2 text-white/90 text-xs hover:underline hover:text-white transition-all duration-300"
               >
                 Forgot Password?
               </NavLink>
-            </p>
-            <Button className="w-full text-white">Login</Button>
+              </div>
+          
+            <Button className="w-full text-white" disabled={isSubmitting}>Login</Button>
           </form>
         </div>
       </div>

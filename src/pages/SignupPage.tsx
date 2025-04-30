@@ -13,6 +13,7 @@ function SignupPage() {
   const [formData, setFormData] = useState<SignupData>({email:"", password:"", first_name:"", last_name:""});
  const [viewPassword, setViewPassword] = useState(false);
  const navigate = useNavigate();
+ const [isSubmitting, setIsSubmitting] = useState(false);
  const [error, setError] = useState({
   email:false,
   password:false,
@@ -21,6 +22,7 @@ function SignupPage() {
   message:""
  });
  async function submitHandler(ev: FormEvent<HTMLFormElement>){
+  setIsSubmitting(true);
   ev.preventDefault();
   if(!formData.first_name){
     setError((prev) => (
@@ -49,6 +51,7 @@ function SignupPage() {
           }
       ));
   }if(!formData.password){
+    setIsSubmitting(false);
       setError((prev) => (
           {
               ...prev,
@@ -59,6 +62,7 @@ function SignupPage() {
       return
   }else{
       if(!/\S+@\S+\.\S+/.test(formData.email)){
+        setIsSubmitting(false);
           setError((prev) => (
               {
                   ...prev,
@@ -73,13 +77,14 @@ function SignupPage() {
       await signUp({...formData});
       navigate("/app");
   } catch (error) {
+    setIsSubmitting(false);
       setError({
           email:true,
           password:true,
           first_name:false,
           last_name:false,
           message:"Account already exists!"
-      })
+      });
   }
  }
 return (
@@ -112,8 +117,8 @@ return (
       </div>
     </div>
     <div className="w-full lg:w-1/2 md:flex items-center justify-center p-6">
-      <div>
-        <div className="mb-8 text-center">
+      <div className="border border-gray-400/90 p-8 rounded-xl">
+        <div className="mb-8">
         <img src={logo} alt="" height={120} width={200} className="ml-[-10px]"/>
           <h1 className="text-2xl font-bold flex justify-between">
             Sign up right now
@@ -151,7 +156,7 @@ return (
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           />
-          {error.email && <p className="text-red-400 text-xs">{error.message}</p>}
+          {error.email && <p className="text-red-400/90 text-xs">{error.message}</p>}
           <Label>Password</Label>
           <div className="relative">
           <Input placeholder="**********" type={viewPassword ? "text" : "password"} 
@@ -159,15 +164,15 @@ return (
           className={error.password ? "border-red-500": undefined}
           onChange={(e) => setFormData({...formData, password: e.target.value})}
           />
-          <Button className="absolute right-3 top-1 bg-white h-6 w-6" type="button" 
+          <Button className="absolute right-3 top-1 h-6 w-6" type="button" 
           onClick={() => setViewPassword((prev) => !prev)} variant={"secondary"}>
               {viewPassword ? <EyeOff /> : <Eye />}
           </Button>
           </div>
-          {error.password && <p className="text-red-400 text-xs">{error.message}</p>}
-          <p className="text-right"><NavLink to={"/"} className="text-primary/70 text-sm hover:underline hover:text-primary">Forgot Password?</NavLink></p>
-          <Button className="w-full text-white">
-              Login
+          {error.password && <p className="text-red-400/90 text-xs">{error.message}</p>}
+          <p className="text-right"><NavLink to={"/signin"} className="text-primary/70 text-sm hover:underline hover:text-primary">Already Have an Account?</NavLink></p>
+          <Button className="w-full text-white" disabled={isSubmitting}>
+              Create
           </Button>
         </form>
       </div>

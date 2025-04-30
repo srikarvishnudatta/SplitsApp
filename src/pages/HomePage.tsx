@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { GroupData } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 
-function HomePageNew() {
+function HomePage() {
   const {accessToken} = useAuth();
   const {error, data, isFetching} = useQuery<unknown, unknown, GroupData[]>({
     queryKey: ["groups"],
@@ -25,4 +25,4 @@ function HomePageNew() {
   )
 }
 
-export default HomePageNew
+export default HomePage;

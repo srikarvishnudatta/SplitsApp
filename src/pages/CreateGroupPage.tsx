@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import InvitationForm from "@/components/Invitation";
 
-function NewGroupPage() {
+function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
     const [receiver, setReceiver] = useState('');
@@ -74,4 +74,4 @@ function NewGroupPage() {
     );
 }
 
-export default NewGroupPage;
+export default CreateGroupPage;

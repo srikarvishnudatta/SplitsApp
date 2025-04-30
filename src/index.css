@@ -1,13 +1,26 @@
 @import "tailwindcss";
 
 @theme{
-    --color-primary: #fd4c55;
+    --color-primary: #0061ff;
+    --color-primary-muted: hsl(217, 100%, 60%);
+    --color-secondary:#60efff;
+    --color-back: hsl(216, 65%, 11%);
+    --color-back-lt: hsl(216, 65%, 12%);
+}
+@layer base{
+    body{
+        background-color: var(--color-back);
+        color: white;
+    }
+    button{
+        cursor: pointer;
+    }
 }
 .bg-gradient{
-    background: linear-gradient(to right, #ff7e29 0%, #ff357f 100%);
+    background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
 }
 .gradient-text{
-    background: linear-gradient(to right, #ff7e29 0%, #ff357f 100%);
+    background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
     color:transparent;
     background-clip: text;
 }
