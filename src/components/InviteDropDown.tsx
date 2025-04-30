@@ -1,10 +1,11 @@
 import { Bell, BellDot, Check, X } from "lucide-react"
-import { DropdownMenu,DropdownMenuContent,DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Button } from "./ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { acceptInvite, allInvites } from "@/api/api_v2";
 import { useAuth } from "@/context/AuthContext";
 import { InvitationResponse, InvitationStatusType } from "@/types/types";
+import { NavLink } from "react-router";
 
 interface InviteNotifsProps{
     open:boolean;
@@ -29,11 +30,16 @@ function InviteDropDown({open, openTrigger} : InviteNotifsProps) {
     console.log(data)
   return (
     <DropdownMenu open={open} onOpenChange={openTrigger}>
-        <DropdownMenuTrigger onClick={openTrigger} className="flex gap-0.5 items-center text-primary border px-2 py-1 rounded-2xl">
-            Invites {data  && data?.length>0 ? <BellDot size={16}/>: <Bell size={16}/>}
+        <DropdownMenuTrigger onClick={openTrigger} className="text-secondary">
+            {data  && data?.length>0 ? <BellDot size={16}/>: <Bell size={16}/>}
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="mr-2 border-gray-200">
-            {isFetched && data?.map((invite) => <Invite {...invite} key={invite.groupId} acceptInvitation={acceptInvitation}/>)}
+        <DropdownMenuContent className="bg-back-lt mt-1 flex flex-col justify-between">
+        <DropdownMenuLabel>Group Invites</DropdownMenuLabel>
+            <div>
+            {data?.length===0 && <DropdownMenuItem className="">No new messages</DropdownMenuItem>}
+            {isFetched && data?.map((invite) => <DropdownMenuItem><Invite {...invite} key={invite.groupId} acceptInvitation={acceptInvitation}/></DropdownMenuItem>)}
+            </div>
+            <DropdownMenuItem><NavLink to={"/app"} className={"mx-auto underline hover:text-gray-300 transition-colors duration-150"}>View All</NavLink></DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
   )

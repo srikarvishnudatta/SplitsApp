@@ -1,6 +1,8 @@
 import { groupById } from "@/api/api_v2";
+import Expenses from "@/components/Expenses";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/context/AuthContext";
 import { GroupData } from "@/types/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -23,38 +25,58 @@ function GroupDetailPage() {
 
   });
   return (
-    <section className="px-4">
+    <section className="px-4 sm:px-6 lg:px-2">
       <h1 className="text-3xl mt-25 font-bold">
         {data?.groupName}
       </h1>
       {/* balances section */}
-      <div className="mt-4">
-        <ul className="space-y-2 italic">
-          <li>Srikar owes Pranu <span className="text-green-500">$12</span></li>
-          <li>Pranu owes Vicky <span className="text-red-500">$2</span></li>
-          <li>Vicky owed Pranu <span>$1</span></li>
+      <div className="mt-4 border border-gray-400/80 rounded-2xl p-4 w-1/4 bg-back-lt">
+      <h2 className="text-lg font-semibold">Balances</h2>
+        <ul className="space-y-2 mt-4">
+          <li className="flex justify-between">Srikar <span className="text-sm text-gray-300">owes</span> Pranu <span className="text-green-500">$12</span></li>
+          <li className="flex justify-between">Pranu owes Vicky <span className="text-red-500">$2</span></li>
+          <li className="flex justify-between">Vicky owed Pranu <span>$1</span></li>
         </ul>
       </div>
 
-      <div className=" pt-4">
+      <div className="pt-4 border-b border-b-gray-600">
         {/* navigation for group settings like with values expenses, members, settings */}
         <Button variant={"link"} onClick={() => setSelected("expenses")}
-          className={`${selected === "expenses" ? "bg-gradient text-white":undefined}`}
+          className={`${selected === "expenses" ? "rounded-none border-b border-b-white text-white":undefined}`}
           >
-          <Receipt />Expenses
+          <Receipt /><span>Expenses</span>
         </Button>
         <Button variant={"link"} onClick={() => setSelected("members")}
-          className={`${selected === "members" ? "bg-gradient text-white":undefined}`}
+          className={`${selected === "members" ? "rounded-none border-b border-b-white text-white":undefined}`}
           >
           <Users />Members
         </Button>
         <Button variant={"link"} onClick={() => setSelected("settings")}
-          className={`${selected === "settings" ? "bg-gradient text-white":undefined}`}>
+          className={`${selected === "settings" ? "rounded-none border-b border-b-white text-white":undefined}`}>
           <Settings />Settings
         </Button>
       </div>
+      <div>
+        <div className="flex justify-between py-4 ">
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="All Members" />
+          </SelectTrigger>
+        <SelectContent className="bg-back-lt">
+          <SelectItem value="light">Srikar</SelectItem>
+          <SelectItem value="dark">Pranu</SelectItem>
+         <SelectItem value="system">Vicky</SelectItem>
+        </SelectContent>
+</Select>
+
+          <Button>
+            <Plus /> New Expense
+          </Button>
+        </div>
+      {selected === "expenses" && <><Expenses /><Expenses/></>}
       {selected === "members" && <Members members={data?.members}/>}
       {selected === "settings" && <GroupSettings />}
+      </div>
     </section>
   )
 }

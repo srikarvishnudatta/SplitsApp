@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
-import {  Menu, User, X } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import {  Menu, User, X, Home, Settings, Wrench, PlusCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -33,38 +32,34 @@ function HomeNavbar() {
   }
   return (
     <header
-      className={`max-w-7xl mx-auto fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md py-3 " : "bg-white py-5"} `}
+      className={` bg-back-lt  fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled ? " shadow-md py-3 " : " py-5"} `}
     >
-      <div className="px-4 sm:px-6 lg:px-2">
+      <div className="px-4 sm:px-6 lg:px-2 max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Menu size={24} className="hidden md:block" />
-            <NavLink to={"/app"}>
+            <NavLink to={"/app"} className={"ml-[-0.4rem]"}>
               <img src={logo} alt="website logo" height={150} width={150} />
             </NavLink>
           </div>
           {/* desktop navigation */}
           <nav className="hidden md:flex gap-4 items-center">
-            <NavLink to={"groups/new"}> New Group</NavLink>
+            <NavLink to={"/app"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300  ${isActive ? "text-secondary border-b" : "text-white border-none"}`}><Home size={16}/>Home</NavLink>
+            <NavLink to={"/app/new-group"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300 ${isActive ? "text-secondary border-b" : "text-white border-none"}`}><PlusCircle size={16}/> New Group</NavLink>
             {/* TODO: make this a button */}
-            <NavLink to={"#features"}>Add Expense</NavLink>
+            <NavLink to={"#features"} className={"flex items-center hover:text-secondary transition-all duration-300"}><PlusCircle size={16}/> Add Expense</NavLink>
             <InviteDropDown open={isInviteOpen} openTrigger={() => setIsInviteOpen((prev) => !prev)}/>
             <DropdownMenu >
               <DropdownMenuTrigger>
-                <Avatar className="border bg-gray-200 border-gray-300">
-                  <AvatarImage
-                    className="w-full"
-                    src="https://api.dicebear.com/9.x/adventurer/svg?seed=Jocelyn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <Button className="bg-back-lt border border-secondary text-secondary hover:bg-secondary/20">
+                  <User /> Account
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white mr-2">
+              <DropdownMenuContent className="bg-back-lt mr-6 mt-2">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem className="underline hover:text-gray-300 transition-colors duration-150"><User/> Profile</DropdownMenuItem>
+                <DropdownMenuItem className="underline hover:text-gray-300 transition-colors duration-150"><Settings/>Settings</DropdownMenuItem>
+                <DropdownMenuItem className="underline hover:text-gray-300 transition-colors duration-150"><Wrench/>Support</DropdownMenuItem>
                 <DropdownMenuItem >
                   <Button className="w-full text-white" onClick={logoutUser}>Logout</Button>
                 </DropdownMenuItem>

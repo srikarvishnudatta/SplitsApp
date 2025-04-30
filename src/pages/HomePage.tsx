@@ -1,8 +1,12 @@
 import { allGroups } from "@/api/api_v2";
 import GroupCard from "@/components/GroupCard"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { GroupData } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
+import { Plus } from "lucide-react";
+import { NavLink } from "react-router";
 
 function HomePage() {
   const {accessToken} = useAuth();
@@ -14,11 +18,19 @@ function HomePage() {
   if(error) return <p>Cannot display content</p>
   console.log(data);
   return (
-    <section className="px-4 ">
-      <h1 className="mt-25 text-2xl text-bold">Groups</h1>
-      <p className="text-sm text-gray-800 my-4">You can view all of your groups here. Click on each group for more.</p>
+    <section className="px-4 sm:px-6 lg:px-2 ">
+      <div className="mt-25 flex justify-between">
+        <div>
+        <h1 className=" text-3xl text-bold">Groups</h1>
+        <p className="text-sm text-gray-200 my-2">You can view all of your groups here. Click on each group for more.</p>
+        </div>
+        <div className="flex gap-2 items-center">
+          <Input placeholder="Filter group"/>
+          <Button ><Plus /><NavLink to={"/app/new-group"}>New Group</NavLink></Button>
+        </div>
+      </div>
       
-      <div className="space-y-2">
+      <div className="">
         {data?.map((group) => <GroupCard {...group} key={group.id}/>)}
       </div>
     </section>
