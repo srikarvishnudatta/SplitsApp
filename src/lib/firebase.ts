@@ -1,7 +1,8 @@
 import { createUser } from "@/api/api_v2";
 import { LoginData, SignupData } from "@/types/types";
-import { initializeApp} from "firebase/app";
+import { FirebaseError, initializeApp} from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile} from "firebase/auth";
+import AuthenticationError from "./error";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -20,7 +21,9 @@ async function signIn(data: LoginData){
         const response = await signInWithEmailAndPassword(auth, data.email, data.password);
         return response.user;
     } catch (error) {
-        throw error;
+        if(error instanceof FirebaseError){
+            throw new AuthenticationError(error.message);
+        }
     }
 }
 async function signUp(data: SignupData){
@@ -33,7 +36,9 @@ async function signUp(data: SignupData){
         await createUser({uid: user.uid, email: user.email!, firstName: data.first_name, lastName: data.last_name});
         return user;
     } catch (error) {
-        throw error
+        if(error instanceof FirebaseError){
+            throw new AuthenticationError(error.message);
+        }
     }
 }
 async function logout(){

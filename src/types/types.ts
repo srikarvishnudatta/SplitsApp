@@ -1,3 +1,6 @@
+export interface InputProps {
+    isError?:boolean;
+}
 export interface GroupData{
     id:number;
     groupName:string;
