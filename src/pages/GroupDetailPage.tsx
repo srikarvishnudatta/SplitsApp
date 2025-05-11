@@ -19,7 +19,7 @@ function GroupDetailPage() {
     staleTime: 1000*60*1
   });
   return (
-    <section className="px-4 sm:px-6 lg:px-2">
+    <section className="px-4 sm:px-6 lg:px-2 mt-6">
       <h1 className="text-3xl mt-25 font-bold">
         {data?.groupName}
       </h1>
@@ -41,12 +41,12 @@ function GroupDetailPage() {
           <Receipt /><span>Expenses</span>
         </Button>
         <Button variant={"link"} onClick={() => setSelected("members")}
-          className={`${selected === "members" ? "rounded-none border-b border-b-white text-white":undefined}`}
+          className={`${selected === "members" ? "rounded-none border-b border-b-primary text-primary":undefined}`}
           >
           <Users />Members
         </Button>
         <Button variant={"link"} onClick={() => setSelected("settings")}
-          className={`${selected === "settings" ? "rounded-none border-b border-b-white text-white":undefined}`}>
+          className={`${selected === "settings" ? "rounded-none border-b border-b-primary text-primary":undefined}`}>
           <Settings />Settings
         </Button>
       </div>
@@ -93,15 +93,18 @@ function Members({members, groupId}:{members: MemberType[]|undefined, groupId:nu
         </div>
       </div>
     ))}
-    {toggleInvite ? <>
+    {toggleInvite ? <div className="bg-white p-4 rounded-2xl shadow-md">
       <InvitationForm groupId={groupId}/>
       <Button onClick={() => setToggleInvite(!toggleInvite)} variant={"outline"}
-        className="text-primary"
+        className="text-primary mt-2"
         >Cancel</Button>
-    </>: 
-    <Button className="text-white" onClick={() => setToggleInvite(!toggleInvite)}>
+    </div>: 
+    <div className="bg-white border border-primary/50 rounded-2xl p-4 shadow flex items-center gap-4">
+      <p className="text-sm text-primary font-semibold">Click to invite your folks</p>
+      <Button className="text-white" onClick={() => setToggleInvite(!toggleInvite)}>
       <Plus/> Invite
-    </Button>}
+    </Button>
+    </div>}
   </div>
 }
 function GroupSettings(){

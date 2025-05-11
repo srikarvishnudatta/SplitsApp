@@ -15,7 +15,7 @@ function HomePage() {
   if(isFetching) return <p>Fetching your groups</p>;
   if(error) return <p>Cannot display content</p>
   return (
-    <section className="px-4 sm:px-6 lg:px-2 ">
+    <section className="px-4 sm:px-6 lg:px-2 mt-6">
       <div className="mt-25 flex justify-between">
         <div>
         <h1 className=" text-4xl text-bold">Groups</h1>

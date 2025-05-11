@@ -69,7 +69,7 @@ function LoginPage() {
       <div className="w-full p-6 min-h-screen lg:w-1/2 md:flex items-center justify-center mx-auto">
         <div className="bg-white p-8 rounded-xl shadow-md">
           <div className="mb-8">
-            <h2 className="text-lg font-bold flex"><Logo/>OweTo</h2>
+            <Logo path="/"/>
             <h1 className="text-2xl font-bold flex justify-between">
               Welcome Back!
             </h1>

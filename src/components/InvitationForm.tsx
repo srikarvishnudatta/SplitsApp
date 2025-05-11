@@ -21,16 +21,17 @@ function InvitationForm({groupId} : InvitationFormProps) {
           mutate({groupId, receiver})
       }
   return (
-    <form onSubmit={submitHandler} className="space-y-5 mt-10">
-        <h2 className="font-bold text-2xl">Now your invite your friends</h2>
-        {isError && <p className="px-2 py-1 text-red-500 text-sm">User can't be found, did you enter the right email?</p>}
-        <Label>Enter their email</Label>
-                <Input type={"text"} name={"group_name"} className={isError ? "border-red-400": undefined}
+    <form onSubmit={submitHandler} className="space-y-2 mt-2">
+        <h2 className="font-semibold text-2xl">Invite your folks</h2>
+        
+        <Label className="text-sm text-primary uppercase">Enter their email</Label>
+                <Input type={"text"} name={"group_name"} className={`focus-visible:ring-0 ${isError ? "border-red-400": undefined}`}
                        value={receiver}
                        placeholder="johndoe@gmail.com"
                 onChange={(e) => setReceiver(e.target.value)}
                 />
-                <Button className={" text-white"}>
+                {isError && <p className="py-1 text-red-500 text-xs font-light">User can't be found, did you enter the right email?</p>}
+                <Button className={"text-white"}>
                     Invite
                 </Button>
     </form>

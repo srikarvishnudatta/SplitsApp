@@ -1,22 +1,20 @@
 import {Label} from "@/components/ui/label.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useMutation} from "@tanstack/react-query";
-import { createGroup } from "@/api/api_v2";
 import {ErrorType, NewGroupResponse, NewGroupType} from "@/types/types.ts";
 import {FormEvent, useState} from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { useAuth } from "@/context/AuthContext";
 import InvitationForm from "@/components/InvitationForm";
+import { createGroup } from "@/api/groupsApi";
 
 function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
-    const {accessToken} = useAuth();
     const {data, isError, isSuccess, mutate} = useMutation<NewGroupResponse, ErrorType, NewGroupType
     >({
-        mutationFn: (data) => createGroup(accessToken || '', data),
+        mutationFn: (data) => createGroup(data),
         onSuccess: () => toast("Group Created Successfully!")
     });
     async function submitHandler(ev: FormEvent<HTMLFormElement>){

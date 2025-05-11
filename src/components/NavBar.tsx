@@ -19,10 +19,7 @@ function NavBar() {
     <header className={`bg-secondary fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled ? " shadow-md py-3 " : " py-5"} `}>
         <div className="px-4 sm:px-6 lg:px-2 max-w-7xl mx-auto">
             <div className="flex justify-between items-baseline">
-                <NavLink to={"/"} className={"flex items-center gap-2"}>
-                    <Logo />
-                    <h3 className="text-text-sc font-bold text-2xl">OweTo</h3>
-                </NavLink>
+                <Logo path="/"/>
                 {/* desktop navigation */}
                 <nav className="hidden md:flex gap-4 items-center">
                     <NavLink to={"/"}>Home</NavLink>

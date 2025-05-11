@@ -6,9 +6,9 @@ type BellProps = {
 
 function Bell({isActive}:BellProps) {
   return (
-    <div className="relative bg-primary text-white p-1 rounded-2xl">
+    <div className="relative bg-secondary text-primary p-1 rounded-lg">
         <BellIcon />
-        {isActive && <div className="absolute top-0 right-0 bg-red-400 h-2 w-2 rounded-2xl">
+        {isActive && <div className="absolute -top-0 -right-1 bg-red-400 h-2 w-2 rounded-2xl">
         </div>}
     </div>
   )

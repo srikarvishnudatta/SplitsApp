@@ -94,7 +94,7 @@ return (
     <div className="w-full p-6 min-h-screen lg:w-1/2 md:flex items-center justify-center mx-auto">
       <div className="bg-white shadow-md p-8 rounded-xl">
         <div className="mb-8">
-        <h2 className="text-lg font-bold flex"><Logo/>OweTo</h2>
+        <Logo path={"/"} />
           <h1 className="text-2xl font-bold flex justify-between">
             Let's get started
           </h1>
@@ -143,7 +143,7 @@ return (
           </Button>
           </div>
           {error.password && <p className="text-red-400/90 text-xs">{error.message}</p>}
-          <p className="text-right"><NavLink to={"/signin"} className="text-primary/70 text-sm hover:underline hover:text-primary">Already Have an Account?</NavLink></p>
+          <p className="text-right"><NavLink to={"/signin"} className="block text-right pt-2 text-xs hover:underline hover:text-primary transition-all duration-100">Already Have an Account?</NavLink></p>
           <Button className="w-full text-white" disabled={isSubmitting}>
               Submit
           </Button>
