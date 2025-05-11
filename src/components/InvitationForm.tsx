@@ -1,5 +1,4 @@
-import { sendInvite } from "@/api/api_v2";
-import { useAuth } from "@/context/AuthContext";
+import { sendInvite } from "@/api/groupsApi";
 import { InviteData } from "@/types/types";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent, useState } from "react";
@@ -12,10 +11,9 @@ type InvitationFormProps = {
     groupId:number;
 }
 function InvitationForm({groupId} : InvitationFormProps) {
-  const {accessToken} =  useAuth();
   const [receiver, setReceiver] = useState('');
   const {mutate , isError} = useMutation<unknown, unknown, InviteData>({
-    mutationFn: (data) => sendInvite(accessToken || '', data),
+    mutationFn: (data) => sendInvite(data),
     onSuccess: () => toast("Invite Sent Successfully!")
 })
   async function submitHandler(ev: FormEvent<HTMLFormElement>){

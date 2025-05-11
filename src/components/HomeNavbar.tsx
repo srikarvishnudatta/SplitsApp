@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
-import logo from "@/assets/logo.svg";
 import { Button } from "./ui/button";
 import {  Menu, User, X, Home, Settings, Wrench, PlusCircle, MailOpen, MailCheck } from "lucide-react";
 import {
@@ -12,15 +11,13 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { logout } from "@/lib/firebase";
-import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@/context/AuthContext";
-import { invitationCount } from "@/api/api_v2";
+import Logo from "./Logo";
+import Bell from "./BellIcon";
 
 function HomeNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
     const navigate = useNavigate();
-    const {accessToken} = useAuth();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -28,35 +25,32 @@ function HomeNavbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const {data, isSuccess} = useQuery({
-    queryKey:["invites-count"],
-    queryFn: () => invitationCount(accessToken || '')
-  })
   async function logoutUser(){
     await logout();
     navigate("/");
   }
   return (
     <header
-      className={` bg-back-lt  fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled ? " shadow-md py-3 " : " py-5"} `}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled ? " shadow-md py-3 " : " py-5"} `}
     >
       <div className="px-4 sm:px-6 lg:px-2 max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <NavLink to={"/app"} className={"ml-[-0.4rem]"}>
-              <img src={logo} alt="website logo" height={150} width={150} />
+            <NavLink to={"/app"} className={"flex items-center gap-2"}>
+              <Logo />
+              <h3 className="text-text-sc font-bold text-2xl">OweTo</h3>
             </NavLink>
           </div>
           {/* desktop navigation */}
-          <nav className="hidden md:flex gap-4 items-center">
-            <NavLink to={"/app"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300  ${isActive ? "text-secondary border-b" : "text-white border-none"}`}><Home size={16}/>Home</NavLink>
-            <NavLink to={"/app/new-group"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300 ${isActive ? "text-secondary border-b" : "text-white border-none"}`}><PlusCircle size={16}/> New Group</NavLink>
+          <nav className="hidden md:flex gap-2 items-center">
+            <NavLink to={"/app"} end 
+            className={({isActive}) => `flex gap-0.5 items-center px-4 py-2  transition-all duration-300  ${isActive ? "bg-primary rounded-md text-white " : " hover:text-primary/90"}`}><Home size={16}/>Home</NavLink>
+            <NavLink to={"/app/new-group"} end className={({isActive}) => `flex items-center gap-0.5 px-4 py-2 transition-all duration-300 ${isActive ? "bg-primary rounded-md text-white" : "hover:text-primary/90"}`}><PlusCircle size={16}/> New Group</NavLink>
             {/* TODO: make this a button */}
-            <NavLink to={"#features"} className={"flex items-center hover:text-secondary transition-all duration-300"}><PlusCircle size={16}/> Add Expense</NavLink>
-            <NavLink to={"/app/invitations"} end className={({isActive}) => `flex gap-0.5 items-center hover:text-secondary transition-all duration-300 ${isActive ? "text-secondary border-b" : "text-white border-none"}`}>
-            {isSuccess && data?.count > 0 ? <MailCheck size={16}/> :<MailOpen size={16}/>}
-            Invites</NavLink>
-            <DropdownMenu >
+            <NavLink to={"#features"} className={"flex items-center px-4 py-2 hover:text-primary/90 transition-all duration-300"}><PlusCircle size={16}/> Add Expense</NavLink>
+            <NavLink to={"/app/invitations"} end className={({isActive}) => `flex gap-0.5 px-4 py-2 items-center transition-all duration-300 ${isActive ? "bg-primary rounded-md text-white" : "hover:text-primary/90"}`}>
+            <Bell isActive={false}/></NavLink>
+            {/* <DropdownMenu >
               <DropdownMenuTrigger>
                 <div className="bg-back-lt flex items-center px-2 py-1 rounded-md border border-secondary text-secondary hover:bg-secondary/20">
                   <User size={16}/> Account
@@ -72,7 +66,7 @@ function HomeNavbar() {
                   <Button className="w-full text-white" onClick={logoutUser}>Logout</Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
           </nav>
           <button
             className="md:hidden"

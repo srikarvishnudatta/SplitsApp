@@ -3,10 +3,12 @@ import { Input } from "@/components/ui/input";
 import { signUp } from "@/lib/firebase";
 import { SignupData } from "@/types/types";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { EyeOff, Eye, CheckCircle } from "lucide-react";
+import { EyeOff, Eye } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
-import logo from "@/assets/logo.svg";
+import Logo from "@/components/Logo";
+import GoogleLogo from "@/components/GoogleLogo";
+import Apple from "@/components/Apple";
 
 
 function SignupPage() {
@@ -88,80 +90,51 @@ function SignupPage() {
   }
  }
 return (
-  <main className="min-h-screen flex">
-    <div className="hidden lg:block lg:w-1/2 bg-gradient text-white/90">
-      <div className="flex justify-center items-center h-screen max-w-md mx-auto">
-        <div className="flex flex-col">
-          <h2 className="text-3xl font-bold mb-6">Join today!</h2>
-          <p className="text-xl mb-8 text-gray-200">
-          Create an account and start managing your shared expenses with friends and family.          </p>
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
-            <p>Track expenses with friends and roommates</p>
-            </div>
-            <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
-            <p>Split bills equally or set custom amounts</p>
-            </div>
-            <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
-            <p>Get notified when you owe money or when you're paid back</p>
-            </div>
-            <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
-            <p>Access your account from any device</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="w-full lg:w-1/2 md:flex items-center justify-center p-6">
-      <div className="border border-gray-400/90 p-8 rounded-xl">
+  <section className="bg-wave">
+    <div className="w-full p-6 min-h-screen lg:w-1/2 md:flex items-center justify-center mx-auto">
+      <div className="bg-white shadow-md p-8 rounded-xl">
         <div className="mb-8">
-        <img src={logo} alt="" height={120} width={200} className="ml-[-10px]"/>
+        <h2 className="text-lg font-bold flex"><Logo/>OweTo</h2>
           <h1 className="text-2xl font-bold flex justify-between">
-            Sign up right now
+            Let's get started
           </h1>
-
-          <p className="mt-2">
+          <p className="mt-2 text-sm font-light">
             Enter your all the details to create your account
           </p>
         </div>
 
         <form className="space-y-3" onSubmit={submitHandler}>
-
           <div className="md:flex md:gap-4 space-y-3 md:space-y-0">
           <div className="space-y-3">
-          <Label>First Name</Label>
+          <Label className="text-sm font-light">First Name</Label>
           <Input placeholder="John" type="text"
-          className={error.first_name ? "border-red-500": undefined}
+          className={`focus-visible:ring-0 border-gray-200 ${error.first_name ? "border-red-500" : undefined}`}
           value={formData.first_name}
           onChange={(e) => setFormData({...formData, first_name: e.target.value})}
           />
           </div>
          <div className="space-y-3">
-         <Label>Last Name</Label>
+         <Label className="text-sm font-light">Last Name</Label>
           <Input placeholder="Doe" type="text"
-          className={error.last_name ? "border-red-500": undefined}
+          className={`focus-visible:ring-0 border-gray-200 ${error.last_name ? "border-red-500" : undefined}`}
           value={formData.last_name}
           onChange={(e) => setFormData({...formData, last_name: e.target.value})}
           />
          </div>
           </div>
 
-          <Label>Email</Label>
+          <Label className="text-sm font-light">Email</Label>
           <Input placeholder="johndoe@example.com" type="email"
-          className={error.email ? "border-red-500": undefined}
+          className={`focus-visible:ring-0 border-gray-200 ${error.email ? "border-red-500" : undefined}`}
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           />
           {error.email && <p className="text-red-400/90 text-xs">{error.message}</p>}
-          <Label>Password</Label>
+          <Label className="text-sm font-light">Password</Label>
           <div className="relative">
           <Input placeholder="**********" type={viewPassword ? "text" : "password"} 
           value={formData.password}
-          className={error.password ? "border-red-500": undefined}
+          className={`focus-visible:ring-0 border-gray-200 ${error.password ? "border-red-500" : undefined}`}
           onChange={(e) => setFormData({...formData, password: e.target.value})}
           />
           <Button className="absolute right-3 top-1 h-6 w-6" type="button" 
@@ -172,12 +145,23 @@ return (
           {error.password && <p className="text-red-400/90 text-xs">{error.message}</p>}
           <p className="text-right"><NavLink to={"/signin"} className="text-primary/70 text-sm hover:underline hover:text-primary">Already Have an Account?</NavLink></p>
           <Button className="w-full text-white" disabled={isSubmitting}>
-              Create
+              Submit
           </Button>
+          <div className="flex items-center gap-1">
+              <div className="border-b border-gray-200 grow "></div>
+              <p className="text-xs font-light text-gray-400">or use</p>
+              <div className="border-b border-gray-200 grow "></div>
+            </div>
+            <Button variant={"secondary"} className="w-full py-6" type="button">
+              <GoogleLogo/> Google
+            </Button>
+            <Button variant={"secondary"} className="w-full py-6" type="button">
+              <Apple/> Apple
+            </Button>
         </form>
       </div>
     </div>
-  </main>
+  </section>
 );
 }
 

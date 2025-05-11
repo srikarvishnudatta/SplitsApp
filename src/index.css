@@ -1,28 +1,25 @@
 @import "tailwindcss";
 
 @theme{
-    --color-primary: #0061ff;
-    --color-primary-muted: hsl(217, 100%, 60%);
-    --color-secondary:#60efff;
-    --color-back: hsl(216, 65%, 11%);
-    --color-back-lt: hsl(216, 65%, 12%);
+    --color-primary: #2A8E9E;
+    --color-secondary:#E9F3F4;
+    --color-text: #1D1E20;
+    --color-text-sc: #180D39;
 }
 @layer base{
     body{
-        background-color: var(--color-back);
-        color: white;
+        background-color: var(--color-secondary);
+        color: var(--color-text);
+    }
+    h1,h2,h3,h4,h5,h6{
+        color: var(--color-text-sc);
     }
     button{
         cursor: pointer;
     }
 }
-.bg-gradient{
-    background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
-}
-.gradient-text{
-    background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
-    color:transparent;
-    background-clip: text;
+.bg-wave{
+    background: url('/src/assets/layered-waves-haikei.svg');
 }
 .animate-slide-up{
     animation: slideInUp 0.5s ease-out forwards;

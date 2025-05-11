@@ -9,8 +9,6 @@ import {
   UsersRound,
 } from "lucide-react";
 import { NavLink } from "react-router";
-import image from "@/assets/image.png";
-import { testimonials } from "@/lib/constants";
 
 const features = [
   {
@@ -49,14 +47,19 @@ const features = [
 
 function LandingPage() {
   return (
-    <><NavBar /><main className="min-h-screen flex flex-col max-w-7xl mx-auto">
+    <>
+    <NavBar />
+    <main className="min-h-screen flex flex-col max-w-7xl mx-auto ">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 ">
+      <section className="pt-32 pb-20 px-4 flex items-center justify-between">
         <div className=" text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 animate-fade-in">
             Split Expenses <span className="gradient-text">Effortlessly</span>
           </h1>
-          <p className="text-xl max-w-2xl mx-auto mb-10 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl mb-6 animate-fade-in">
+            Never Owe anyone.
+          </h1>
+          <p className="text-lg max-w-2xl mx-auto mb-10 animate-fade-in">
             The easiest way to split bills with friends and family. Keep track
             of shared expenses and balances.
           </p>
@@ -77,28 +80,53 @@ function LandingPage() {
               </Button>
             </NavLink>
           </div>
-          <div className="animate-slide-up ">
-            <img src={image} alt="app-feature-image" height={400} />
-          </div>
         </div>
+        <div className="animate-slide-up hidden md:block">
+            <div className="relative bg-white h-[400px] w-[350px] rounded-2xl">
+              <div className="p-4 space-y-2">
+                <div className="border-1 border-gray-200 rounded-xl p-4 shadow-md">
+                  <h4 className=" text-sm">Paris Trip</h4>
+                  <p className="font-semibold text-lg">$2040.83</p>
+                  <p className="text-sm text-gray-500">Apr 23, 2025</p>
+                </div>
+                <div className="border-1 border-primary rounded-xl p-4 shadow-md">
+                  <h4 className=" text-sm">Home Expenses</h4>
+                  <p className="font-semibold text-lg">$200.13</p>
+                  <p className="text-sm text-gray-500">Mar 23, 2025</p>
+                </div>
+                <div className="border-1 border-gray-200 rounded-xl p-4 shadow-md">
+                  <h4 className=" text-sm">NYE Party</h4>
+                  <p className="font-semibold text-lg">$20.25</p>
+                  <p className="text-sm text-gray-500">Jan 01, 2025</p>
+                </div>
+                <Button variant={"default"} className="w-full text-white">Settle</Button>
+              </div>
+            </div>
+          </div>
       </section>
 
       {/* Features section */}
-      <section className="py-20 px-4" id="features">
-        <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <section className="animate-slide-up py-20 px-6 shadow-lg bg-white rounded-xl" id="features">
+        <div className="mb-20">
+
+          <h6 className="text-sm md:text-md uppercase text-primary font-semibold mb-4">
             Features You'll love
+          </h6>
+          <div className="flex justify-between">
+          <h2 className="text-4xl w-1/2">
+            Because splitting expenses should not be hard
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-md text-muted-foreground max-w-2xl mx-auto w-1/3 font-light">
             Everything you need to manage shared expenses with friends, family,
-            and roommates.
+            and roommates. It is quite simple, create group and boom you are ready to split expenses.
           </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 rounded-xl border transition-all duration-300 hover:shadow-lg"
+              className="p-6 "
             >
               <div className="mb-4 p-3 inline-block rounded-lg">
                 {feature.icon}
@@ -110,48 +138,8 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            What Our Users Say
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join hundreds of happy users who have simplified their expense
-            tracking.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 ">
-          {testimonials.map((testimonial, index) => (
-            <div
-              className="p-6 rounded-xl border shadow:md relative"
-              key={index}
-            >
-              <div className="mb-8">
-                {/* Quote marks */}
-                <div className="absolute top-4 right-4 text-5xl text-primary/20 font-serif">
-                  "
-                </div>
-                <p className="text-muted-foreground relative z-10">
-                  {testimonial.content}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full mr-4" />
-                <div>
-                  <h4 className="font-semibold">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* footer Section */}
+      {/* TODO */}
     </main></>
   );
 }

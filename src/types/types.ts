@@ -3,7 +3,7 @@ export interface GroupData{
     groupName:string;
     groupDescription:string;
     members:MemberType[];
-    isAdmin:boolean;
+    admin:boolean;
 }
 export interface MemberType{
     firstName:string;
@@ -38,14 +38,14 @@ export interface InvitationResponse{
     id:number;
     groupName: string;
     email: string;
-    status: number;
+    status: string;
 }
 export interface InvitationStatusType{
     id:number;
-    status:number;
+    status:string;
 }
 export interface CreateUserType{
-    id:string;
+    uid:string;
     email:string;
     firstName:string;
     lastName:string;

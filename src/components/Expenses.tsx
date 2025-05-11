@@ -3,7 +3,7 @@ import { DollarSign } from "lucide-react"
 
 function Expenses() {
   return (
-    <div className="flex justify-between border border-gray-600 rounded-md px-4 py-2 bg-back-lt
+    <div className="flex justify-between bg-white shadow-sm rounded-2xl px-4 py-2 bg-back-lt
     
     hover:bg-back-lt/5">
         <div className="flex gap-2 items-center">

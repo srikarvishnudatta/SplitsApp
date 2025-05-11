@@ -1,9 +1,9 @@
-import { BASE_URL } from "@/lib/constants";
+import { BASE_URL } from "@/lib/endpoints";
 import { CreateUserType, InvitationStatusType, InviteData, NewGroupResponse, NewGroupType } from "@/types/types";
 
 // create user
 async function createUser(newUser: CreateUserType){
-    const response = await fetch(BASE_URL + "user/create-if-not-exists/", {
+    const response = await fetch(BASE_URL + "user/create-if-not-exists", {
         headers:{
             "Content-type":"application/json"
         },
@@ -51,7 +51,7 @@ async function groupById(accessToken:string, id:number){
 
 }
 async function sendInvite(accessToken:string, data:InviteData){
-    const response = await fetch(BASE_URL + "invitations/",{
+    const response = await fetch(BASE_URL + "invites/new",{
         headers:{
             "Content-type":"application/json",
             Authorization:`Bearer ${accessToken}`
@@ -62,7 +62,7 @@ async function sendInvite(accessToken:string, data:InviteData){
     if(!response.ok) throw new Error("Something went wrong");
 }
 async function allInvites(accessToken:string){
-    const response = await fetch(BASE_URL + "invitations/",{
+    const response = await fetch(BASE_URL + "invites/",{
         headers:{
             "Content-type":"application/json",
             Authorization:`Bearer ${accessToken}`
@@ -84,7 +84,7 @@ async function invitationCount(accessToken:string): Promise<{count: number}>{
     return await response.json();
 }
 async function updateInvite(accessToken:string, data:InvitationStatusType){
-    const response = await fetch(BASE_URL + "invitations/"+data.id,{
+    const response = await fetch(BASE_URL + "invites/"+data.id,{
         headers:{
             "Content-type":"application/json",
             Authorization:`Bearer ${accessToken}`

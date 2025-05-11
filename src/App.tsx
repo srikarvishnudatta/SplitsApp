@@ -14,9 +14,10 @@ function App() {
         <Route path="/signup" element={<SignupPage />}/>
         <Route path="app" element={<Layout />}>
           <Route index element={<HomePage />}/>
-          <Route path=":groupId" element={<GroupDetailPage />}/>
+          <Route path=":groupId" element={<GroupDetailPage />} />
+          {/* />
           <Route path="new-group" element={<CreateGroupPage />}/>
-          <Route path="invitations" element={<InvitationPage />} />
+          <Route path="invitations" element={<InvitationPage />} /> */}
         </Route>
   </Routes>
 }

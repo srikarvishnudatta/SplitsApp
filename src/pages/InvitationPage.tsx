@@ -1,10 +1,9 @@
 import { allInvites, updateInvite } from "@/api/api_v2"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/context/AuthContext"
-import { InvitationResponse, InviteData } from "@/types/types";
+import { InvitationResponse } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Trash, X } from "lucide-react"
-import { ReactNode } from "react";
 
 function InvitationPage() {
   const {accessToken} = useAuth();
@@ -16,7 +15,7 @@ function InvitationPage() {
     queryKey: ["invitations"],
     queryFn: () => allInvites(accessToken || '')
   });
-  async function updateInvitationStatus(id:number, status:number){
+  async function updateInvitationStatus(id:number, status:string){
     await updateInvite(accessToken || '', {id, status});
     refetch();
   }
@@ -36,9 +35,9 @@ function InvitationPage() {
           <p>{invite.email} wants you to join: {invite.groupName}</p>
           <div className="flex gap-2 py-2 items-center">
           <Button className="bg-red-500 hover:bg-red-400"
-          onClick={() => updateInvitationStatus(invite.id,2)}
+          onClick={() => updateInvitationStatus(invite.id,"DECLINED")}
           ><X />Decline</Button>
-          <Button onClick={() => updateInvitationStatus(invite.id,1)}><Check/>Accept</Button> 
+          <Button onClick={() => updateInvitationStatus(invite.id,"ACCEPTED")}><Check/>Accept</Button> 
           </div>
         </div>)}
       </div>
@@ -72,13 +71,13 @@ const statuses = [
     statusClass:" text-red-800  border-red-800 "
   }
 ];
-function InviteStatusCard({ invite, updateInvitationStatus}: {invite:InvitationResponse, updateInvitationStatus : (id:number, status:number) => void}){
-  const stat = statuses.filter((stat) => stat.status === invite.status);
+function InviteStatusCard({ invite, updateInvitationStatus}: {invite:InvitationResponse, updateInvitationStatus : (id:number, status:string) => void}){
+  const stat = statuses.filter((stat) => stat.statusName === invite.status);
   return <div className="border border-gray-600 rounded-md px-4 py-2 w-fit">
                 <p className="py-2">Invited {invite.email} to join your group {invite.groupName}</p>
     <span className={`mt-2 px-2 py-1 border rounded-2xl ${stat[0].statusClass}`}>{stat[0].statusName}</span>
-    {invite.status === 0 && <Button className="bg-red-500 hover:bg-red-400 ml-2" 
-            onClick={() => updateInvitationStatus(invite.id, 3)}
+    {invite.status === "PENDING" && <Button className="bg-red-500 hover:bg-red-400 ml-2" 
+            onClick={() => updateInvitationStatus(invite.id, "CANCELLED")}
             ><Trash/>Cancel</Button>}
   </div>
 }
