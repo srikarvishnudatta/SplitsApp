@@ -8,10 +8,10 @@ import GoogleButton from "@/components/GoogleButton";
 import AppleButton from "@/components/AppleButton";
 import LoginsignupWrapper from "@/components/LoginsignupWrapper";
 import PasswordInput from "@/components/PasswordInput";
-import EmailInput from "@/components/EmailInput";
 import { useMutation } from "@tanstack/react-query";
 import AuthError from "@/components/AuthError";
 import AuthenticationError from "@/lib/error";
+import DataInput from "@/components/DataInput";
 
 
 function LoginPage() {
@@ -46,7 +46,12 @@ function LoginPage() {
    <LoginsignupWrapper variant="login">
     <form className="space-y-3" onSubmit={submitHandler}>
     {error && <AuthError message={error}/>}
-          <EmailInput ref={emailRef}
+          <DataInput ref={emailRef}
+          id="email"
+          placeholder="johndoe@example.com"
+          type="email"
+          name="email"
+          label="Email"
           isError={error?.includes("Email")}
           />
           <PasswordInput ref={passwordRef} 

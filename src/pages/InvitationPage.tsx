@@ -1,25 +1,21 @@
-import { allInvites, updateInvite } from "@/api/api_v2"
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@/context/AuthContext"
+import { getAllInvites, updateInvite } from "@/api/groupsApi";
+import { Button } from "@/components/ui/button";
 import { InvitationResponse } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Trash, X } from "lucide-react"
 
 function InvitationPage() {
-  const {accessToken} = useAuth();
-
   const {data, refetch} = useQuery<{
     sentInvitations: InvitationResponse[],
     receivedInvitations: InvitationResponse[]
   }>({
     queryKey: ["invitations"],
-    queryFn: () => allInvites(accessToken || '')
+    queryFn: () => getAllInvites()
   });
   async function updateInvitationStatus(id:number, status:string){
-    await updateInvite(accessToken || '', {id, status});
+    await updateInvite({id, status});
     refetch();
   }
-  console.log(data);
   return (
     <section className="px-4 sm:px-6 lg:px-2">
       <div className="mt-25 mb-10">

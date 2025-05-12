@@ -21,9 +21,8 @@ function InvitationForm({groupId} : InvitationFormProps) {
           mutate({groupId, receiver})
       }
   return (
-    <form onSubmit={submitHandler} className="space-y-2 mt-2">
+    <form onSubmit={submitHandler} className="bg-white p-2 md:p-4 lg:p-6 rounded-md space-y-2 mt-2">
         <h2 className="font-semibold text-2xl">Invite your folks</h2>
-        
         <Label className="text-sm text-primary uppercase">Enter their email</Label>
                 <Input type={"text"} name={"group_name"} className={`focus-visible:ring-0 ${isError ? "border-red-400": undefined}`}
                        value={receiver}

@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import GroupDetailPage from "./pages/GroupDetailPage";
 import CreateGroupPage from "./pages/CreateGroupPage";
 import InvitationPage from "./pages/InvitationPage";
+import CreateExpensePage from "./pages/CreateExpensePage";
 function App() {
   return <Routes>    
         <Route path="/" element={<LandingPage/>}/>
@@ -15,9 +16,10 @@ function App() {
         <Route path="app" element={<Layout />}>
           <Route index element={<HomePage />}/>
           <Route path=":groupId" element={<GroupDetailPage />} />
-          {/* />
           <Route path="new-group" element={<CreateGroupPage />}/>
+          {/* />
           <Route path="invitations" element={<InvitationPage />} /> */}
+          <Route path="new-expense" element={<CreateExpensePage />} />
         </Route>
   </Routes>
 }

@@ -1,19 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { signUp } from "@/lib/firebase";
 import { SignupData } from "@/types/types";
-import { Label } from "@radix-ui/react-dropdown-menu";
 import { FormEvent, useCallback, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import Divider from "@/components/Divider";
 import GoogleButton from "@/components/GoogleButton";
 import AppleButton from "@/components/AppleButton";
 import LoginsignupWrapper from "@/components/LoginsignupWrapper";
-import EmailInput from "@/components/EmailInput";
 import PasswordInput from "@/components/PasswordInput";
 import { useMutation } from "@tanstack/react-query";
 import AuthenticationError from "@/lib/error";
 import AuthError from "@/components/AuthError";
+import DataInput from "@/components/DataInput";
 
 function SignupPage() {
     const firstName = useRef<HTMLInputElement>(null);
@@ -52,31 +50,35 @@ function SignupPage() {
       <form className="space-y-3" onSubmit={submitHandler}>
         {error && <AuthError message={error}/>}
         <div className="md:flex md:gap-4 space-y-3 md:space-y-0">
-          <div className="space-y-3">
-            <Label className="text-sm font-light">First Name</Label>
-            <Input
-              placeholder="John"
-              type="text"
-              className={`focus-visible:ring-0 border-gray-200 ${error ? "border-red-500" : undefined}`}
-              ref={firstName}
-            />
-          </div>
-          <div className="space-y-3">
-            <Label className="text-sm font-light">Last Name</Label>
-            <Input
-              placeholder="Doe"
-              type="text"
-              className={`focus-visible:ring-0 border-gray-200 ${error ? "border-red-500" : undefined}`}
-              ref={lastName}
-            />
-          </div>
+          <DataInput 
+          label="First Name"
+          id="first_name"
+          name="firstName"
+          placeholder="John"
+          type="text"
+          isError={error.length>0}
+          ref={firstName}
+          />
+          <DataInput 
+          label="First Name"
+          id="last_name"
+          name="lastName"
+          placeholder="Doe"
+          type="text"
+          ref={lastName}
+          isError={error.length>0}
+          />
         </div>
 
-        <EmailInput ref={emailRef}
-        isError={error?.includes("Email")}
+        <DataInput id="email"
+        name="email"
+        label="Email"
+          placeholder="johndoe@example.com"
+          type="email" ref={emailRef}
+        isError={error.length>0 && error?.includes("Email")}
         />
         <PasswordInput ref={passwordRef}
-        isError={error?.includes("Password")}
+        isError={error.length>0 && error?.includes("Password")}
         />
         <p className="text-right">
           <NavLink

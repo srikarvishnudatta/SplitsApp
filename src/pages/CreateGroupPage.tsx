@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button.tsx";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorType, NewGroupResponse, NewGroupType } from "@/types/types.ts";
 import { FormEvent, useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import InvitationForm from "@/components/InvitationForm";
 import { createGroup } from "@/api/groupsApi";
+import DataInput from "@/components/DataInput";
+import TextAreaInput from "@/components/TextAreaInput";
 
 function CreateGroupPage() {
   const groupNameRef = useRef<HTMLInputElement>(null);
@@ -28,31 +28,23 @@ function CreateGroupPage() {
     if (!groupName || !groupDescription) return;
     mutate({ groupName, groupDescription });
   }
-  if (isError) {
-    return <p>Error has occurred. Please try refreshing the page.</p>;
-  }
   return (
     <section className="mt-25 w-1/2 mx-auto h-screen">
-      <form className={"flex flex-col gap-4"} onSubmit={submitHandler}>
-        <h2 className={"font-bold text-2xl"}>Create your group here:</h2>
-        <Label>Group Name:</Label>
-        <Input
-          type={"text"}
-          name={"group_name"}
-          placeholder="eg: Trip to Paris, Camping Trip"
-          className={"border-1"}
-          ref={groupNameRef}
+      <form className={"bg-white p-2 md:p-4 lg:p-6 rounded-md shadow-md flex flex-col gap-4"} onSubmit={submitHandler}>
+        <h2 className={"text-primary font-semibold text-3xl"}>Create your group here:</h2>
+        <DataInput 
+        type={"text"}
+        name={"group_name"}
+        placeholder="eg: Trip to Paris, Camping Trip"
+        label="Group Name"
+        className={"px-3 py-1 border border-gray-300 w-full rounded-md"}
+        ref={groupNameRef}
         />
-        <Label>Description:</Label>
-        <Textarea
-          id="group-description"
-          placeholder="Add some details about this group"
-          ref={groupDescRef}
-          rows={3}
-        />
-        <Button className={"bg-primary text-white"}>Submit</Button>
+        <TextAreaInput />
+        <Button className={"bg-primary text-white"} type="submit">Submit</Button>
       </form>
       {isSuccess && <InvitationForm groupId={data.groupId} />}
+      {isError && <p>Error has occurred. Please try refreshing the page.</p>}
     </section>
   );
 }

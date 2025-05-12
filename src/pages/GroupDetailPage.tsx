@@ -12,12 +12,13 @@ import { useParams } from "react-router";
 function GroupDetailPage() {
   const [selected, setSelected] = useState('expenses');
   const params = useParams();
-  const groupId = parseInt(params.groupId || '') ;
+  const groupId = parseInt(params.groupId!) ;
   const {data} = useQuery<unknown, unknown, GroupData>({
     queryKey:["groups", groupId],
     queryFn: () => getGroupById(groupId),
     staleTime: 1000*60*1
   });
+  console.log(data);
   return (
     <section className="px-4 sm:px-6 lg:px-2 mt-6">
       <h1 className="text-3xl mt-25 font-bold">

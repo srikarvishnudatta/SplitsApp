@@ -13,6 +13,8 @@ import {
 import { logout } from "@/lib/firebase";
 import Logo from "./Logo";
 import Bell from "./BellIcon";
+import { useQuery } from "@tanstack/react-query";
+import { getInvitesCount } from "@/api/groupsApi";
 
 const navOptions = [
   {
@@ -40,6 +42,10 @@ function HomeNavbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const {data} = useQuery({
+    queryKey: ["invite"],
+    queryFn: getInvitesCount
+  });
   async function logoutUser(){
     await logout();
     navigate("/");
@@ -64,7 +70,7 @@ function HomeNavbar() {
               </NavLink>
             ))}
             <NavLink to={"/app/invitations"}>
-            <Bell isActive={false}/></NavLink>
+            <Bell isActive={data && data.data > 0}/></NavLink>
             {/* <DropdownMenu >
               <DropdownMenuTrigger>
                 <div className="bg-back-lt flex items-center px-2 py-1 rounded-md border border-secondary text-secondary hover:bg-secondary/20">
