@@ -10,7 +10,7 @@ function InvitationPage() {
     receivedInvitations: InvitationResponse[]
   }>({
     queryKey: ["invitations"],
-    queryFn: () => getAllInvites()
+    queryFn: getAllInvites
   });
   async function updateInvitationStatus(id:number, status:string){
     await updateInvite({id, status});
@@ -22,8 +22,6 @@ function InvitationPage() {
         <h1 className="text-3xl font-bold">Invitations</h1>
         <p className="text-sm text-gray-200">You can view all your invitations.</p>
       </div>
-
-      {/* filtered sent */}
       <div>
         <h2 className="text-xl font-semibold">Invites Received</h2>
         {data?.receivedInvitations.length === 0 && <p>No new invitations</p>}
@@ -37,7 +35,6 @@ function InvitationPage() {
           </div>
         </div>)}
       </div>
-      {/* filtered received */}
       <div className="mt-10">
         <h2 className="text-xl font-semibold">Invites Sent</h2>
         {data?.sentInvitations.map((invite) => <InviteStatusCard key={invite.id} invite={invite} updateInvitationStatus={updateInvitationStatus}/>)}

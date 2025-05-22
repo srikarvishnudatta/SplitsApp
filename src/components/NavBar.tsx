@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { NavLink } from "react-router";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
-import Logo from "./Logo";
+import Logo from "./ui-custom/Logo";
 
 function NavBar() {
   const [isScrolled, setIsScrolled] =  useState(false);

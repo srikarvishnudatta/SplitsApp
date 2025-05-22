@@ -1,13 +1,12 @@
-import { Label } from "@/components/ui/label.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorType, NewGroupResponse, NewGroupType } from "@/types/types.ts";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useCallback, useRef } from "react";
 import { toast } from "sonner";
 import InvitationForm from "@/components/InvitationForm";
 import { createGroup } from "@/api/groupsApi";
-import DataInput from "@/components/DataInput";
-import TextAreaInput from "@/components/TextAreaInput";
+import DataInput from "@/components/ui-custom/DataInput";
+import TextAreaInput from "@/components/ui-custom/TextAreaInput";
 
 function CreateGroupPage() {
   const groupNameRef = useRef<HTMLInputElement>(null);
@@ -21,13 +20,13 @@ function CreateGroupPage() {
     mutationFn: (data) => createGroup(data),
     onSuccess: () => toast("Group Created Successfully!"),
   });
-  async function submitHandler(ev: FormEvent<HTMLFormElement>) {
+  const submitHandler = useCallback((ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const groupName = groupNameRef.current?.value;
     const groupDescription = groupDescRef.current?.value;
     if (!groupName || !groupDescription) return;
     mutate({ groupName, groupDescription });
-  }
+  }, [groupNameRef, groupDescRef, mutate]);
   return (
     <section className="mt-25 w-1/2 mx-auto h-screen">
       <form className={"bg-white p-2 md:p-4 lg:p-6 rounded-md shadow-md flex flex-col gap-4"} onSubmit={submitHandler}>

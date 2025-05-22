@@ -3,15 +3,15 @@ import { NavLink, useNavigate } from "react-router";
 import { LoginData } from "@/types/types";
 import { FormEvent, useCallback, useRef, useState } from "react";
 import { signIn } from "@/lib/firebase";
-import Divider from "@/components/Divider";
-import GoogleButton from "@/components/GoogleButton";
-import AppleButton from "@/components/AppleButton";
+import Divider from "@/components/ui-custom/Divider";
+import GoogleButton from "@/components/ui-custom/GoogleButton";
+import AppleButton from "@/components/ui-custom/AppleButton";
 import LoginsignupWrapper from "@/components/LoginsignupWrapper";
-import PasswordInput from "@/components/PasswordInput";
+import PasswordInput from "@/components/ui-custom/PasswordInput";
 import { useMutation } from "@tanstack/react-query";
-import AuthError from "@/components/AuthError";
+import AuthError from "@/components/ui-custom/AuthError";
 import AuthenticationError from "@/lib/error";
-import DataInput from "@/components/DataInput";
+import DataInput from "@/components/ui-custom/DataInput";
 
 
 function LoginPage() {
@@ -34,14 +34,14 @@ function LoginPage() {
       return true;
     }
   }, [setError]);
-  async function submitHandler(ev: FormEvent<HTMLFormElement>) {
+  const submitHandler = useCallback(async (ev: FormEvent<HTMLFormElement>) =>{
     ev.preventDefault();
     const email = emailRef.current?.value as string;
     const password = passwordRef.current?.value as string;
     if(validate(email, password)){
       mutate({email, password});
     }
-  }
+  }, [emailRef, passwordRef, mutate]);
   return (
    <LoginsignupWrapper variant="login">
     <form className="space-y-3" onSubmit={submitHandler}>

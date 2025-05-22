@@ -1,6 +1,3 @@
-export interface InputProps {
-    isError?:boolean;
-}
 export interface GroupData{
     id:number;
     groupName:string;
@@ -52,4 +49,12 @@ export interface CreateUserType{
     email:string;
     firstName:string;
     lastName:string;
+}
+export interface ExpenseType{
+    expenseName:string;
+    expenseDesc:string;
+    amount:Number;
+    groupId:number;
+    paidBy:string;
+    splitAmong:string[];
 }

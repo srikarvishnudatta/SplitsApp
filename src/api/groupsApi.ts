@@ -1,4 +1,9 @@
-import { CreateUserType, InvitationStatusType, InviteData, NewGroupResponse, NewGroupType } from "@/types/types";
+import { CreateUserType, 
+    InvitationResponse, 
+    InvitationStatusType, 
+    InviteData, 
+    NewGroupResponse, 
+    NewGroupType } from "@/types/types";
 import axiosInstance from "./axios";
 import { CREATE_USER, GROUP, INVITES } from "@/lib/endpoints";
 
@@ -17,7 +22,10 @@ async function getGroupById(id:number){
 async function sendInvite(data: InviteData){
     return await axiosInstance.post(`${INVITES}new`, data);
 }
-async function getAllInvites(){
+async function getAllInvites(): Promise<{
+    sentInvitations: InvitationResponse[],
+    receivedInvitations: InvitationResponse[]
+  }>{
     return await axiosInstance.get(`${INVITES}`);
 }
 async function updateInvite(data:InvitationStatusType){

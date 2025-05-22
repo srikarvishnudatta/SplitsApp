@@ -11,8 +11,8 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { logout } from "@/lib/firebase";
-import Logo from "./Logo";
-import Bell from "./BellIcon";
+import Logo from "./ui-custom/Logo";
+import Bell from "./ui-custom/BellIcon";
 import { useQuery } from "@tanstack/react-query";
 import { getInvitesCount } from "@/api/groupsApi";
 

@@ -1,4 +1,4 @@
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import logo from "@/assets/google-icon.svg";
 function GoogleButton() {
   return (

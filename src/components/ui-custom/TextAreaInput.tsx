@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 
 
 const TextAreaInput = forwardRef<HTMLTextAreaElement>((props, ref) => {
@@ -7,6 +7,7 @@ const TextAreaInput = forwardRef<HTMLTextAreaElement>((props, ref) => {
         <Label htmlFor="description">Description:</Label>
         <textarea
           id="description"
+          name="description"
           placeholder="Add some details about this group"
           ref={ref}
           className="px-3 py-1 border w-full border-gray-300 rounded-md"

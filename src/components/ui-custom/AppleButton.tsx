@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import logo from "@/assets/apple-icon.svg";
 
 function AppleButton() {

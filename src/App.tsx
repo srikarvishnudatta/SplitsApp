@@ -6,7 +6,6 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import GroupDetailPage from "./pages/GroupDetailPage";
 import CreateGroupPage from "./pages/CreateGroupPage";
-import InvitationPage from "./pages/InvitationPage";
 import CreateExpensePage from "./pages/CreateExpensePage";
 function App() {
   return <Routes>    

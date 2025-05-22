@@ -1,10 +1,11 @@
 import { forwardRef, useState } from "react";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
 import { EyeOff, Eye } from "lucide-react";
-import { InputProps } from "@/types/types";
 
-
+type InputProps = {
+    isError?:boolean
+}
 
 const PasswordInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const [viewPassword, setViewPassword] = useState(false);

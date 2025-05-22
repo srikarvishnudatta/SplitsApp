@@ -1,6 +1,6 @@
 import { Outlet } from "react-router"
 import HomeNavbar from "./HomeNavbar"
-import AddExpense from "./AddExpenseButton"
+import AddExpense from "./ui-custom/AddExpenseButton"
 
 function Layout() {
   return (

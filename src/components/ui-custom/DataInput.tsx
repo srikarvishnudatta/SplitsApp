@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 import { cn } from "@/lib/utils";
 
 type DataInputProps = {
